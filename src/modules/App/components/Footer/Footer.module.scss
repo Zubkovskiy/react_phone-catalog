@@ -1,0 +1,90 @@
+@use "../../../shared/utils/mixins.scss" as *;
+
+.decor {
+  height: 1px;
+  width: 100%;
+  background: var(--gray-elements);
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 auto;
+  max-width: var(--container);
+  height: 96px;
+
+  @include respond-to(tablet) {
+    padding: 0 24px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 32px 16px;
+    height: 257px;
+
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 106.8px;
+
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 92%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-white);
+
+  @include respond-to(tablet) {
+    gap: 13.5px;
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.scroll {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &__img_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--gray-surface-2);
+  }
+
+  &:hover .scroll__img_wrap {
+    background: var(--gray-icons-placeholders);
+    transition: var(--transition);
+  }
+
+  &:active .scroll__img_wrap {
+    background: var(--accent);
+  }
+
+  &__txt {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 12px;
+    text-align: right;
+    color: var(--gray-secondary);
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+    justify-content: center;
+  }
+}

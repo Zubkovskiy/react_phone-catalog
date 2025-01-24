@@ -1,0 +1,84 @@
+@use "../shared/utils/mixins.scss" as *;
+
+:root {
+  --accent: #905bff;
+  --gray-white: #f1f2f9;
+  --gray-secondary: #75767f;
+  --gray-icons-placeholders: #4a4d58;
+  --gray-elements: #3b3e4a;
+  --gray-surface-2: #323542;
+  --gray-surface-1: #161827;
+  --gray-black: #0f1121;
+  --font-family: "Mont", sans-serif;
+  --second-family: "Inter", sans-serif;
+  --third-family: "Manrope", sans-serif;
+  --container: 1136px;
+  --transition: all .3s ease;
+  --transition-background: background 0.3s ease;
+  --scale: scale(1.1);
+  --border: 1px solid var(--gray-surface-2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: url('/img/cursor.svg'), auto;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--gray-black);
+  color: var(--gray-white);
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+img {
+  display: flex;
+}
+
+.container {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
+  min-height: calc(100vh - 64px - 96px - 1px);
+
+  @include respond-to(tablet) {
+    padding: 0 24px;
+    min-height: calc(100vh - 48px - 96px - 1px);
+  }
+
+  @include respond-to(mobile) {
+    padding: 0 16px;
+    min-height: calc(100vh - 48px - 257px - 1px);
+  }
+}
+
+.App {
+  position: relative;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
+.navbar {
+  color: var(--gray-secondary);
+  text-transform: uppercase;
+
+  &__item {
+    &-selected {
+      color: var(--gray-white);
+    }
+  }
+}

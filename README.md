@@ -29,30 +29,30 @@ Use the data from `/public/api` and images from `/public/img` folders. You can r
    - Use CSS modules.
    - Keep `.module.scss` files together with their components.
 2. Advanced project structure:
-   - `src/modules` folder. Inside per page modules `HomePage`, `CartPage`, etc., and `shared` folder with shared content between modules.
-   - Inside each module its own `components` folder with the structure described above. And optionally other files/folders: `hooks`, `constants`, and so on.
-3. Add the sticky header with a logo, navigation, favorites, and cart.
+   - `src/modules` папка.Внутренние модули на страницу `HomePage`, `CartPage`, etc., and `shared` Папка с общим содержанием между модулями.
+   - Внутри каждого модуля свой собственный `components` Папка со структурой, описанной выше.И необязательно другие файлы/папки: `hooks`, `constants`, and so on.
+3. Добавьте липкий заголовок с логотипом, навигацией, фаворитами и тележкой.
 4. The footer with the link to the GitHub repo and `Back to top` button.
-   - The content should be limited to the same width as the page content;
+   - Содержание должно быть ограничено той же шириной, что и содержание страницы;
    - `Back to top` button should scroll to the top smoothly;
 5. Add `NotFoundPage` containing text `Page not found` for all the unknown URLs.
 6. All changes the hover effects should be smooth.
 7. Scale all image links by 10% on hover.
-8. Implement all form elements and icons according to the UI Kit.
+8. Реализуйте все элементы формы и значки в соответствии с набором пользовательского интерфейса.
 
 ## Home page
 
 Implement Home page at available at `/`.
 
 1. `<h1>Product Catalog</h1>` should be visually hidden.
-2. `PicturesSlider`:
-   - Find your own images to personalize the App;
-   - Change pictures automatically every 5 seconds;
-   - The next buttons should show the first image after the last one;
-   - Dashes at the bottom should allow choosing an exact picture.
-3. `ProductsSlider` for the `Hot prices` block:
-   - The products with a discount starting from the biggest absolute value;
-   - `<` and `>` buttons should scroll products.
+2. `Picturesslider`:
+- Найдите свои собственные изображения, чтобы персонализировать приложение;
+- менять картинки автоматически каждые 5 секунд;
+- Следующие кнопки должны показывать первое изображение после последнего;
+- Черный цвет внизу должен позволить выбрать точную картину.
+3.
+- продукты со скидкой, начиная с самой большой абсолютной стоимости;
+- `<` `и`> `кнопки должны прокручивать продукты.
 4. `Shop by category` block with links to `/phones`, `/tablets`, and `/accessories`.
 5. Add Brand new block using ProductsSlider with products that are the newest according to the year field.
 
