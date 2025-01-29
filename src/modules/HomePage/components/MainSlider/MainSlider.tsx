@@ -29,6 +29,12 @@ export const MainSlider = () => {
           nextEl: `.${styles.next}`,
           prevEl: `.${styles.prev}`,
         }}
+        breakpoints={
+          {
+            // 639: { navigation: false },
+            // 1199: { navigation: true, height: 221 },
+          }
+        }
         modules={[Autoplay, Pagination, Navigation]}
         className={styles.main_slider}
       >

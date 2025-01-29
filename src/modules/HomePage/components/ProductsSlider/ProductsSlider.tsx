@@ -51,8 +51,8 @@ export const ProductsSlider: React.FC<Props> = ({
           disabledClass: styles.disabled,
         }}
         breakpoints={{
-          320: { slidesPerView: 1.5, slidesPerGroup: 1 },
-          640: { slidesPerView: 2.5, slidesPerGroup: 2 },
+          320: { slidesPerView: 1.4, slidesPerGroup: 1 },
+          640: { slidesPerView: 2.4, slidesPerGroup: 2 },
           1200: { slidesPerView: 4, slidesPerGroup: 4 },
         }}
       >
