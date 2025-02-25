@@ -29,11 +29,23 @@
   }
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+
+  & img {
+    cursor: pointer;
+  }
+}
+
 .links {
   display: flex;
   align-items: center;
   gap: 106.8px;
 
+  height: 100%;
   font-family: var(--font-family);
   font-weight: 800;
   font-size: 12px;
@@ -41,6 +53,11 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--gray-white);
+  cursor: pointer;
+
+  & a {
+    cursor: pointer;
+  }
 
   @include respond-to(tablet) {
     gap: 13.5px;
@@ -64,6 +81,12 @@
     width: 32px;
     height: 32px;
     background: var(--gray-surface-2);
+    cursor: pointer;
+    transition: var(--transition);
+
+    & img {
+      cursor: pointer;
+    }
   }
 
   &:hover .scroll__img_wrap {

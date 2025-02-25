@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import globalStyles from '../../../shared/globalStyles.module.scss';
 import styles from './Footer.module.scss';
 
 import logo from '/img/logo.svg';
@@ -11,7 +10,7 @@ export const Footer = () => {
     <>
       <div className={styles.decor}></div>
       <footer className={styles.footer}>
-        <div className={globalStyles.logo}>
+        <div className={styles.logo}>
           <Link to={'/'}>
             <img src={logo} alt="logo" />
           </Link>
