@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 272px;
-  min-height: 506px;
+  height: 506px;
   padding: 32px;
   background-color: var(--gray-surface-1);
   font-family: var(--font-family);
@@ -14,7 +14,7 @@
     display: flex;
     height: auto;
     max-height: 196px;
-    object-fit: fill;
+    object-fit: scale-down;
     margin: 0 auto;
     transition: var(--transition);
   }
@@ -26,11 +26,21 @@
   @include respond-to(tablet) {
     width: 237px;
     height: 512px;
+
+    & .img {
+      width: 173px;
+      height: 202px;
+    }
   }
 
   @include respond-to(mobile) {
     width: 212px;
     height: 439px;
+
+    & .img {
+      width: 148px;
+      height: 129px;
+    }
   }
 }
 
@@ -38,13 +48,15 @@
   position: relative;
 }
 
-
-
 .name {
   font-weight: 600;
   font-size: 15px;
   line-height: 150%;
   color: var(--gray-white);
+
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
 }
 
 .price_wrap {
@@ -132,6 +144,14 @@
 
   &:hover {
     background: var(--accent-hover);
+  }
+
+  @include respond-to(tablet) {
+    width: 125px;
+  }
+
+  @include respond-to(mobile) {
+    width: 100px;
   }
 }
 
