@@ -1,3 +1,5 @@
+@use "../../../shared/utils/mixins.scss" as *;
+
 .model {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,16 @@
 
   &:hover .img {
     transform: var(--scale);
+  }
+
+  @include respond-to(tablet) {
+    width: 237px;
+    height: 512px;
+  }
+
+  @include respond-to(mobile) {
+    width: 212px;
+    height: 439px;
   }
 }
 

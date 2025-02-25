@@ -1,8 +1,30 @@
+@use "../../../shared/utils/mixins.scss" as *;
+
 .models_list {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+}
+
+.products_slider {
+  @include respond-to(tablet) {
+    margin-right: calc(-50vw + 50%);
+  }
+}
+
+.products_slide {
+  width: 272px;
+
+  @include respond-to(tablet) {
+    width: 237px;
+    height: 512px;
+  }
+
+  @include respond-to(mobile) {
+    width: 212px;
+    height: 439px;
+  }
 }
 
 .models_top {

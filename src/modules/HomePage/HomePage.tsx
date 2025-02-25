@@ -56,7 +56,10 @@ export const HomePage = () => {
   return (
     <div className={styles.home}>
       <h1 className={global.title}>Welcome to Nice Gadgets store!</h1>
-      <MainSlider />
+      <div className={styles.main_slider}>
+        <MainSlider />
+      </div>
+
       <div className={styles.new_models}>
         <ProductsSlider models={newModels} title={titleNewModels} />
       </div>
