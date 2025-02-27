@@ -38,6 +38,11 @@
   & img {
     cursor: pointer;
   }
+
+  @include respond-to(mobile) {
+    height: 32px;
+    margin-bottom: 32px;
+  }
 }
 
 .links {

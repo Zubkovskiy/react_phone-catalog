@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const CategoryCard: React.FC<Props> = ({ item, img }) => (
-  <li key={item.category} className={styles.category__item}>
+  <li key={item.category} className={styles.category}>
     <a href="#" className={styles.category__wrapper}>
       <img className={styles.category__img} src={img} alt={item.category} />
       <p className={styles.category__title}>{item.category}</p>

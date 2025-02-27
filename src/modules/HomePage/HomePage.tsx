@@ -1,3 +1,8 @@
+// ! Переробити картинки слайдера, зробити кнопку
+// ! Зробити Link
+// ! Зробити кнопки активними
+// ! Прибрати вертикальну прокрутку в menu
+
 import { MainSlider } from './components/MainSlider';
 import { Categorys } from './components/Categorys/Categorys';
 import { useEffect, useState } from 'react';
