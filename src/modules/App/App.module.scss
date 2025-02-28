@@ -25,6 +25,10 @@
   padding: 0;
   box-sizing: border-box;
   cursor: url('/img/cursor.svg'), auto;
+
+  &::selection {
+    background: var(--accent)
+  }
 }
 
 body {
