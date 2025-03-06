@@ -6,7 +6,7 @@ import { ProductCard } from '../ProductCard';
 
 import { Navigation } from 'swiper/modules';
 
-import { Model } from '../types/Model';
+import { Model } from '../../../../types/Model';
 
 import 'swiper/css';
 import 'swiper/css/navigation';

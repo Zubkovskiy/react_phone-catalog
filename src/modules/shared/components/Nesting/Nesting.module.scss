@@ -1,0 +1,44 @@
+@use '../../utils/mixins.scss' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 25px 0 40px;
+
+  @include respond-to(mobile) {
+    margin-bottom: 24px;
+  }
+}
+
+.home, .arrow {
+  display: flex;
+  cursor: pointer;
+
+  &::before {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.home {
+  &::before {
+    content: url('/img/icons/home.svg');
+  }
+}
+
+.arrow {
+  opacity: 0.5;
+
+  &::before {
+    content: url('/img/icons/arrow-right.svg');
+  }
+}
+
+.category {
+  color: var(--gray-secondary);
+  font-weight: 700;
+  font-size: 12px;
+}

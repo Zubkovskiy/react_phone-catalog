@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { CategorySummary } from '../types/CategorySummary';
-import { Model } from '../types/Model';
+import { CategorySummary } from '../../../../types/CategorySummary';
+import { Model } from '../../../../types/Model';
 
 import styles from './Categorys.module.scss';
 import globalStyles from '../../../shared/globalStyles.module.scss';

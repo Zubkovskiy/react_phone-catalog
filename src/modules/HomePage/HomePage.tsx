@@ -1,13 +1,12 @@
 // ! Переробити картинки слайдера, зробити кнопку
 // ! Зробити Link
 // ! Зробити кнопки активними
-// ! Прибрати вертикальну прокрутку в menu
 
 import { MainSlider } from './components/MainSlider';
 import { Categorys } from './components/Categorys/Categorys';
 import { useEffect, useState } from 'react';
-import { hotPricesFetch, newModelsFetch } from './services/goods';
-import { Model } from './components/types/Model';
+import { goods } from '../../services/goods';
+import { Model } from '../../types/Model';
 import { ProductsSlider } from './components/ProductsSlider';
 
 import global from '../shared/globalStyles.module.scss';
@@ -29,14 +28,18 @@ export const HomePage = () => {
       setLoading(true);
       try {
         const [newModelsData, hotPricesData] = await Promise.all([
-          newModelsFetch(),
-          hotPricesFetch(),
+          goods.newModelsFetch(),
+          goods.hotPricesFetch(),
         ]);
 
         setNewModels(newModelsData);
         setHotPrices(hotPricesData);
-      } catch {
-        setErrorMessage('Try again later');
+      } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage('An unknown error occurred');
+        }
       } finally {
         setLoading(false);
       }

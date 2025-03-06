@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CategorySummary } from '../types/CategorySummary';
+import { CategorySummary } from '../../../../types/CategorySummary';
 
 import styles from './CategoryCard.module.scss';
 

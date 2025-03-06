@@ -2,7 +2,7 @@ import { addSpace } from '../utils/addSpace';
 
 import styles from './ProductCard.module.scss';
 
-import { Model } from '../types/Model';
+import { Model } from '../../../../types/Model';
 
 import favorite from '/img/icons/favourites.svg';
 import React from 'react';
