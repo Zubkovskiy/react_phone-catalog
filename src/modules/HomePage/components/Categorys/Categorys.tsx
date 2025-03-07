@@ -1,71 +1,61 @@
 import { useEffect, useState } from 'react';
 
-import { CategorySummary } from '../../../../types/CategorySummary';
 import { Model } from '../../../../types/Model';
+import { CategoryCard } from '../CategoryCard';
 
 import styles from './Categorys.module.scss';
 import globalStyles from '../../../shared/globalStyles.module.scss';
 
 import phones from '/img/category/category-phones.jpg';
-import tablests from '/img/category/category-tablets.jpg';
-import Accessories from '/img/category/category-accessories.jpg';
-import { CategoryCard } from '../CategoryCard';
+import tablets from '/img/category/category-tablets.jpg';
+import accessories from '/img/category/category-accessories.jpg';
+import { getData } from '../../../../utils/httpClient';
 
 export const Categorys = () => {
-  const [categorySummary, setCategorySummary] = useState<CategorySummary[]>([]);
+  const [phonesSum, setPhonesSum] = useState<number>();
+  const [tabletsSum, setTabletsSum] = useState<number>();
+  const [accessoriesSum, setAccessoriesSum] = useState<number>();
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const categoryImg = [phones, tablests, Accessories];
+  const categoryNames = ['phones', 'tablets', 'accessories'];
+  const categoryCounts = [phonesSum, tabletsSum, accessoriesSum];
+  const categoryImg = [phones, tablets, accessories];
 
   useEffect(() => {
-    fetch('/api/products.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-
-        return response.json();
-      })
-      .then((data: Model[]) => {
-        const summary: Record<string, Set<string>> = {};
-
-        data.forEach(product => {
-          if (!summary[product.category]) {
-            summary[product.category] = new Set();
-          }
-
-          summary[product.category].add(product.name);
-        });
-
-        const result = Object.entries(summary).map(([category, models]) => ({
-          category,
-          total: models.size,
-        }));
-
-        const categoryOrder = ['phones', 'tablets', 'accessories'];
-        const sortedResult = result.sort(
-          (a, b) =>
-            categoryOrder.indexOf(a.category) -
-            categoryOrder.indexOf(b.category),
+    const fetchData = async () => {
+      try {
+        getData('/phones.json').then(response =>
+          setPhonesSum((response as Model[]).length),
         );
 
-        setCategorySummary(sortedResult);
-      })
-      .catch(err => {
-        setError(err.message);
+        getData('/tablets.json').then(response =>
+          setTabletsSum((response as Model[]).length),
+        );
+
+        getData('/accessories.json').then(response =>
+          setAccessoriesSum((response as Model[]).length),
+        );
+
         setLoading(false);
-      })
-      .finally(() => setLoading(false));
+      } catch (err) {
+        setError('Failed to fetch data');
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   if (loading) {
-    return <p>Завантаження...</p>;
+    return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <p>Помилка: {error}</p>;
+  if (error && !loading) {
+    return <div>{error}</div>;
   }
 
   return (
@@ -75,11 +65,15 @@ export const Categorys = () => {
       </h2>
 
       <ul className={styles.category__wrapper}>
-        {categorySummary.map(item => {
-          const img = categoryImg.shift() || '';
-
-          return <CategoryCard key={item.category} item={item} img={img} />;
-        })}
+        {categoryNames.map((category, index) => (
+          <li key={index}>
+            <CategoryCard
+              name={category}
+              img={categoryImg[index]}
+              count={categoryCounts[index]}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

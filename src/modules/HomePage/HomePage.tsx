@@ -52,13 +52,17 @@ export const HomePage = () => {
     return <div>Loading...</div>;
   }
 
-  if (errorMessage) {
+  if (!loading && errorMessage) {
     return (
       <div>
         <p>{errorMessage}</p>
         <button onClick={() => window.location.reload()}>Reload</button>
       </div>
     );
+  }
+
+  if (!newModels.length || (!hotPrices.length && !loading && !errorMessage)) {
+    return <div>No data</div>;
   }
 
   return (

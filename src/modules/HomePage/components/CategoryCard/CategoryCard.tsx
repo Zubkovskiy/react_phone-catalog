@@ -1,20 +1,21 @@
 import React from 'react';
 
-import { CategorySummary } from '../../../../types/CategorySummary';
-
 import styles from './CategoryCard.module.scss';
 
 type Props = {
-  item: CategorySummary;
+  name: string;
   img: string;
+  count?: number;
 };
 
-export const CategoryCard: React.FC<Props> = ({ item, img }) => (
-  <li key={item.category} className={styles.category}>
+export const CategoryCard: React.FC<Props> = ({ name, img, count }) => (
+  <li className={styles.category}>
     <a href="#" className={styles.category__wrapper}>
-      <img className={styles.category__img} src={img} alt={item.category} />
-      <p className={styles.category__title}>{item.category}</p>
-      <p className={styles.category__subt_itle}>{item.total} models</p>
+      <img className={styles.category__img} src={img} alt={name} />
+      <p className={styles.category__title}>{name}</p>
+      <p className={styles.category__subtitle}>
+        {count ? `${count} models` : 'Loading...'}
+      </p>
     </a>
   </li>
 );
