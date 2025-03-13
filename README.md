@@ -58,21 +58,21 @@ Implement Home page at available at `/`.
 
 ## Product pages
 
-There should be 3 separate pages `/phones`, `/tablets`, and `/accessories`.
+Должно быть 3 отдельных страниц `/телефонов`,`/таблеток и `/аксессуаров.
 
-1. Each page loads the data of the required `type`.
-2. Add an `h1` with `Phones/Tablets/Accessories page` (choose required).
-3. Add `ProductsList` component showing all the `products`.
-4. Implement a `Loader` to show it while waiting for the data from the server.
-5. In case of a loading error show the something went wrong message with a reload button.
-6. If there are no products available show the `There are no phones/tablets/accessories yet` message (choose required).
-7. Add a `<select>` with the `Newest`, `Alphabetically`, and `Cheapest` options to sort products by `age`, `title`, or `price` (after discount).
-   - Save the sort value in the URL `?sort=age` and apply it after the page reload.
-8. Add `Pagination` buttons and `Items on page` select element with `4`, `8`, `16`, and `all` options.
-   - It should limit the products you show to the user;
-   - Save pagination params in the URL `?page=2&perPage=8` (`page=1` and `perPage=all` are the default values and should not be added to the URL;
-   - Hide pagination elements if they do not make sense;
-   - You can use the logic explained in [the React Pagination task](https://github.com/mate-academy/react_pagination#react-pagination).
+1. Каждая страница загружает данные требуемого `type`.
+2. Добавьте `h1` с` телефоны/планшеты/страница аксессуаров (выберите необходимый).
+3. Добавить компонент `productslist`, показывающий все продукты.
+4. Реализуйте `Loader ', чтобы показать его в ожидании данных с сервера.
+5. В случае ошибки загрузки показать что -то пошло неправильное сообщение с кнопкой перезагрузки.
+6. Если нет доступных продуктов, показывают, что сообщение пока нет телефонов/планшетов/аксессуаров (выберите необходимые).
+7. Добавьте `<SELECT>` с `NewSave`,` ALPHABOTICALY` и `Самые дешевые 'варианты для сортировки продуктов по` age`, `title' или` price '(после скидки).
+- Сохраните значение сортировки в URL `? Sort = age` и примените его после перезагрузки страницы.
+8. Добавьте кнопки «странификации» и элементы `на странице« Выберите элемент с параметрами `4`,` 8`, `16` и` all ».
+- это должно ограничить продукты, которые вы показываете пользователю;
+- Сохранить параметры странификации в URL `? Page = 2 & perpage = 8` (` page = 1` и `perpage = all` значения по умолчанию и не должны быть добавлены в URL;
+- Скрыть элементы страниц, если они не имеют смысла;
+-Вы можете использовать логику, объясненную в [задаче React Pagination] (https://github.com/mate-academy/react_pagination#react-pagination).
 
 ## Product details page
 

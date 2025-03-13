@@ -6,12 +6,11 @@ import {
 } from 'react-router-dom';
 import { App } from './modules/App/App';
 import { HomePage } from './modules/HomePage/HomePage';
-import { NotFoundPage } from './modules/NotFoundPage/NotFoundPage';
-import { PhonesPage } from './modules/PhonesPages/PhonesPage';
-import { Tablets } from './modules/TabletsPages/Tablets';
-import { Accessories } from './modules/AccessoriesPages/Accessories';
 import { Favourites } from './modules/FavouritesPages/Favourites';
 import { Cart } from './modules/CartPage/Cart';
+import { ProductPage } from './modules/ProductPage';
+// eslint-disable-next-line max-len
+import { NotFoundPage } from './modules/shared/components/NotFoundPage/NotFoundPage';
 
 export const Root = () => {
   return (
@@ -21,13 +20,12 @@ export const Root = () => {
           <Route index element={<HomePage />} />
 
           <Route path="home" element={<Navigate to="../" replace />} />
-          <Route path="phones" element={<PhonesPage />} />
-          <Route path="tablets" element={<Tablets />} />
-          <Route path="accessories" element={<Accessories />} />
+          <Route path=":category" element={<ProductPage />} />
 
           <Route path="favourites" element={<Favourites />} />
           <Route path="cart" element={<Cart />} />
 
+          <Route path="not-found" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

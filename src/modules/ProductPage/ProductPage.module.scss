@@ -1,0 +1,14 @@
+.product {
+  &__amount_models {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--gray-secondary);
+  }
+
+  &__cards {
+    margin-top: 24px;
+    margin-bottom: 40px;
+  }
+}

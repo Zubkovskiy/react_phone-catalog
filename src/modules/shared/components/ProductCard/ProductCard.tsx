@@ -1,14 +1,13 @@
-import { addSpace } from '../utils/addSpace';
+import React from 'react';
+import { addSpace } from '../../../HomePage/components/utils/addSpace';
+import { NormalizedProduct } from '../../../../types/NormalizedProduct';
 
 import styles from './ProductCard.module.scss';
 
-import { Model } from '../../../../types/Model';
-
 import favorite from '/img/icons/favourites.svg';
-import React from 'react';
 
 type Props = {
-  model: Model;
+  model: NormalizedProduct;
   discount?: boolean;
 };
 

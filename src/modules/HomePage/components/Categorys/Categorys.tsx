@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { Model } from '../../../../types/Model';
-import { CategoryCard } from '../CategoryCard';
 
 import styles from './Categorys.module.scss';
 import globalStyles from '../../../shared/globalStyles.module.scss';
@@ -10,6 +9,7 @@ import phones from '/img/category/category-phones.jpg';
 import tablets from '/img/category/category-tablets.jpg';
 import accessories from '/img/category/category-accessories.jpg';
 import { getData } from '../../../../utils/httpClient';
+import { CategoryCard } from '../CategoryCard';
 
 export const Categorys = () => {
   const [phonesSum, setPhonesSum] = useState<number>();
