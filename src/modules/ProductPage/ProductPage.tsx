@@ -11,16 +11,15 @@ import globalStyles from '../shared/globalStyles.module.scss';
 import styles from './ProductPage.module.scss';
 
 export const ProductPage: React.FC = () => {
-  const { category } = useParams();
   const [product, setProduct] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const { category } = useParams();
 
   const allowedCategories = React.useMemo(
     () => ['phones', 'tablets', 'accessories'],
     [],
   );
-
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);

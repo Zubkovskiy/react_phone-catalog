@@ -3,3 +3,69 @@
   flex-wrap: wrap;
   gap: 40px 16px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 40px 0 80px;
+
+  .numbers {
+    display: flex;
+    gap: 8px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-surface-1);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: var(--gray-elements);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .arrow {
+    padding: 8px;
+    background: var(--gray-surface-2);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    &--left::before {
+      background-image: url('/img/icons/arrow-left.svg');
+    }
+
+    &--right::before {
+      background-image: url('/img/icons/arrow-right.svg');
+    }
+  }
+
+  .active {
+    background-color: var(--accent);
+  }
+}
+
