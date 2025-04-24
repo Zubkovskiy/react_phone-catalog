@@ -6,6 +6,7 @@ import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Loader } from '../shared/components/Loader';
 import { getData } from '../../utils/httpClient';
 import { Product } from '../../types/Product';
+import { ControlsPanel } from './components/ControlsPanel';
 
 import globalStyles from '../shared/globalStyles.module.scss';
 import styles from './ProductPage.module.scss';
@@ -65,6 +66,8 @@ export const ProductPage: React.FC = () => {
       <div className={styles.product__amount_models}>
         {product.length} models
       </div>
+
+      <ControlsPanel />
 
       <div className={styles.product__cards}>
         <ProductCards model={product} />

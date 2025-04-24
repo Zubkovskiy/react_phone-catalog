@@ -1,0 +1,88 @@
+.panel {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--gray-secondary);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.selectContainer {
+  position: relative;
+  width: 176px;
+  height: 40px;
+}
+
+.selectButton {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: var(--gray-surface-2);
+  color: #fff;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.arrow {
+  &::before {
+    content: '';
+    display: flex;
+    width: 16px;
+    height: 16px;
+    color: var(--gray-secondary);
+
+    background-color: currentColor;
+  }
+
+  &_up::before {
+    mask-image: url('/img/icons/arrow-up.svg');
+  }
+
+  &_down::before {
+    mask-image: url('/img/icons/arrow-down.svg');
+  }
+}
+
+.focus {
+  border-color: var(--accent);
+}
+
+.optionsList {
+  position: absolute;
+  background: var(--gray-black);
+  border: 1px solid var(--gray-elements);
+  width: 100%;
+  margin-top: 4px;
+  z-index: 10;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+
+  height: 32px;
+  cursor: pointer;
+  color: var(--gray-secondary);
+
+  &:hover {
+    background: var(--gray-surface-2);
+    color: var(--gray-white);
+  }
+}
