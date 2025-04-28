@@ -3,10 +3,12 @@
 .category {
   flex: 1;
   aspect-ratio: 1 / 1;
+  cursor: pointer;
 
   &__img {
     width: 100%;
     transition: var(--transition);
+    cursor: pointer;
   }
 
   &__title {
@@ -14,6 +16,7 @@
     font-weight: 700;
     font-size: 20px;
     text-transform: capitalize;
+    cursor: pointer;
   }
 
   &__subtitle {

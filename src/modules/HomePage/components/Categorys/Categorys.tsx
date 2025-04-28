@@ -10,6 +10,7 @@ import tablets from '/img/category/category-tablets.jpg';
 import accessories from '/img/category/category-accessories.jpg';
 import { getData } from '../../../../utils/httpClient';
 import { CategoryCard } from '../CategoryCard';
+import { Link } from 'react-router-dom';
 
 export const Categorys = () => {
   const [phonesSum, setPhonesSum] = useState<number>();
@@ -66,12 +67,14 @@ export const Categorys = () => {
 
       <ul className={styles.category__wrapper}>
         {categoryNames.map((category, index) => (
-          <li key={index}>
-            <CategoryCard
-              name={category}
-              img={categoryImg[index]}
-              count={categoryCounts[index]}
-            />
+          <li key={index} className={styles.category__item}>
+            <Link to={`/${category}`}>
+              <CategoryCard
+                name={category}
+                img={categoryImg[index]}
+                count={categoryCounts[index]}
+              />
+            </Link>
           </li>
         ))}
       </ul>
