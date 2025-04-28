@@ -25,7 +25,7 @@
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    border: 1px solid var(--gray-icons-+-placeholders);
+    border: var(--gray-icons-placeholders);
   }
 
   &:focus {
