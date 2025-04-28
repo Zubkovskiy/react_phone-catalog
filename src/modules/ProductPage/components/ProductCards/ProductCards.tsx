@@ -12,55 +12,52 @@ type Props = {
 export const ProductCards: React.FC<Props> = ({ model }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const pageFromParams = Number(searchParams.get('page')) || 1;
+  const sortParam = searchParams.get('sort') || 'Newest';
   const perPageParam = searchParams.get('perPage') || '16';
+  const pageFromParams = Number(searchParams.get('page')) || 1;
+
   const PRODUCTS_PER_PAGE =
     perPageParam === 'all' ? model.length : Number(perPageParam);
 
-  const totalPages = Math.ceil(model.length / PRODUCTS_PER_PAGE);
+  const sortedProducts = [...model].sort((a, b) => {
+    if (sortParam === 'Alphabetically') {
+      return a.name.localeCompare(b.name);
+    }
+
+    if (sortParam === 'Cheapest') {
+      return a.priceDiscount - b.priceDiscount;
+    }
+
+    return 0;
+  });
+
+  const totalPages = Math.ceil(sortedProducts.length / PRODUCTS_PER_PAGE);
   const currentPage = Math.min(Math.max(pageFromParams, 1), totalPages);
 
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
-  const visibleProducts = model.slice(startIndex, endIndex);
+  const visibleProducts = sortedProducts.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       const newParams = new URLSearchParams(searchParams);
 
       newParams.set('page', page.toString());
-
       setSearchParams(newParams);
       window.scrollTo({ top: 0 });
     }
   };
 
-  const generatePages = () => {
-    const pages: (number | string)[] = [];
-
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        pages.push(1, 2, 3, 4);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
-      } else {
-        pages.push(
-          currentPage - 2,
-          currentPage - 1,
-          currentPage,
-          currentPage + 1,
-          currentPage + 2,
-        );
-      }
-    }
-
-    return pages;
-  };
+  if (perPageParam === 'all') {
+    return (
+      <div className={styles.cards}>
+        {sortedProducts.map(item => (
+          <ProductCard key={item.id} model={normalizeProduct(item)} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -70,39 +67,35 @@ export const ProductCards: React.FC<Props> = ({ model }) => {
         ))}
       </div>
 
-      {perPageParam !== 'all' && (
-        <div className={styles.pagination}>
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`${styles.arrow} ${styles['arrow--left']}`}
-          ></button>
+      <div className={styles.pagination}>
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className={`${styles.arrow} ${styles['arrow--left']}`}
+        ></button>
 
-          <div className={styles.numbers}>
-            {generatePages().map((page, index) =>
-              typeof page === 'number' ? (
-                <button
-                  key={index}
-                  onClick={() => handlePageChange(page)}
-                  className={currentPage === page ? styles.active : ''}
-                >
-                  {page}
-                </button>
-              ) : (
-                <span key={index} className={styles.dots}>
-                  ...
-                </span>
-              ),
-            )}
-          </div>
+        <div className={styles.numbers}>
+          {[...Array(totalPages)].map((_, i) => {
+            const page = i + 1;
 
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`${styles.arrow} ${styles['arrow--right']}`}
-          ></button>
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={currentPage === page ? styles.active : ''}
+              >
+                {page}
+              </button>
+            );
+          })}
         </div>
-      )}
+
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className={`${styles.arrow} ${styles['arrow--right']}`}
+        ></button>
+      </div>
     </>
   );
 };
