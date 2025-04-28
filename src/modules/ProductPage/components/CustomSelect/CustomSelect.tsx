@@ -21,17 +21,17 @@ export const CustomSelect: FC<CustomSelectProps> = ({
     <div className={styles.wrapper}>
       <p className={styles.title}>{title}</p>
       <div className={styles.selectContainer} ref={dropdown.ref}>
-        <button
+        <div
           className={`${styles.selectButton} ${dropdown.isOpen ? styles.focus : ''}`}
           onClick={dropdown.toggle}
         >
-          <span>{selected}</span>
+          <span className={styles.text}>{selected}</span>
           <div
             className={`${styles.arrow} ${
               dropdown.isOpen ? styles.arrow_up : styles.arrow_down
             }`}
           />
-        </button>
+        </div>
 
         <ul
           className={`${styles.optionsList} ${
