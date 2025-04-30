@@ -43,3 +43,12 @@
   font-size: 12px;
   text-transform: capitalize;
 }
+
+.active {
+  color: var(--gray-white);
+  cursor: pointer;
+}
+
+.name {
+  color: var(--gray-secondary);
+}

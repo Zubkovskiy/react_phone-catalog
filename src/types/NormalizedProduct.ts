@@ -7,4 +7,5 @@ export interface NormalizedProduct {
   capacity: string;
   ram: string;
   image: string;
+  category: string;
 }

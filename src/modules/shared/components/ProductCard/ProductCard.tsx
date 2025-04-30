@@ -5,6 +5,7 @@ import { NormalizedProduct } from '../../../../types/NormalizedProduct';
 import styles from './ProductCard.module.scss';
 
 import favorite from '/img/icons/favourites.svg';
+import { Link } from 'react-router-dom';
 
 type Props = {
   model: NormalizedProduct;
@@ -14,10 +15,14 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ model, discount }) => {
   return (
     <div className={styles.model}>
-      <img src={model.image} alt={model.name} className={styles.img} />
+      <Link to={`/${model.category}/${model.id}`}>
+        <img src={model.image} alt={model.name} className={styles.img} />
+      </Link>
 
       <div className={styles.down}>
-        <p className={styles.name}>{model.name}</p>
+        <Link to={`/${model.category}/${model.id}`} className={styles.name}>
+          {model.name}
+        </Link>
         <div className={styles.price_wrap}>
           {discount ? (
             <>

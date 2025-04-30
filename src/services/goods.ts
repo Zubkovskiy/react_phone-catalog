@@ -1,4 +1,5 @@
 import { Model } from '../types/Model';
+import { Product } from '../types/Product';
 import { getData } from '../utils/httpClient';
 
 export const goods = {
@@ -26,5 +27,20 @@ export const goods = {
 
       return discountB - discountA;
     });
+  },
+
+  productDetailsFetch: async (
+    category: string,
+    id: string,
+  ): Promise<Product> => {
+    const product = await getData<Product[]>(`/${category}.json`);
+
+    const productDetails = product.find(item => item.id === id);
+
+    if (!productDetails) {
+      throw new Error(`Product with id ${id} not found`);
+    }
+
+    return productDetails;
   },
 };

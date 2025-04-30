@@ -15,6 +15,7 @@ export const normalizeProduct = (
       capacity: product.capacity,
       ram: product.ram,
       image: product.images[0],
+      category: product.category,
     };
   }
 
@@ -27,5 +28,6 @@ export const normalizeProduct = (
     capacity: product.capacity,
     ram: product.ram,
     image: product.image,
+    category: product.category,
   };
 };

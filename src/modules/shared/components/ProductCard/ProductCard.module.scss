@@ -17,6 +17,7 @@
     object-fit: scale-down;
     margin: 0 auto;
     transition: var(--transition);
+    cursor: pointer;
   }
 
   &:hover .img {
@@ -53,6 +54,7 @@
   font-size: 15px;
   line-height: 150%;
   color: var(--gray-white);
+  cursor: pointer;
 
   @include respond-to(tablet) {
     font-size: 14px;
