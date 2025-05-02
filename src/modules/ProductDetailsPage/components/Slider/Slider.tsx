@@ -1,105 +1,58 @@
-// import React, { useRef, useState } from 'react';
-// // Import Swiper React components
-// import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { useEffect, useState } from 'react';
 
-// // Import Swiper styles
-// import 'swiper/css';
-// import 'swiper/css/free-mode';
-// import 'swiper/css/navigation';
-// import 'swiper/css/thumbs';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper';
+import { Navigation, Thumbs } from 'swiper/modules';
 
-// import './styles.css';
+import styles from './Slider.module.scss';
 
-// // import required modules
-// import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { Product } from '../../../../types/Product';
 
-// export default function App() {
-//   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
-//   return (
-//     <>
-//       <Swiper
-//         style={{
-//           '--swiper-navigation-color': '#fff',
-//           '--swiper-pagination-color': '#fff',
-//         }}
-//         spaceBetween={10}
-//         navigation={true}
-//         thumbs={{ swiper: thumbsSwiper }}
-//         modules={[FreeMode, Navigation, Thumbs]}
-//         className="mySwiper2"
-//       >
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-//         </SwiperSlide>
-//       </Swiper>
-//       <Swiper
-//         onSwiper={setThumbsSwiper}
-//         spaceBetween={10}
-//         slidesPerView={4}
-//         freeMode={true}
-//         watchSlidesProgress={true}
-//         modules={[FreeMode, Navigation, Thumbs]}
-//         className="mySwiper"
-//       >
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-//         </SwiperSlide>
-//       </Swiper>
-//     </>
-//   );
-// }
+type Props = {
+  product: Product;
+};
+
+export const Slider: React.FC<Props> = ({ product }) => {
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
+
+  useEffect(() => {
+    if (thumbsSwiper) {
+      thumbsSwiper.slideTo(0);
+    }
+  }, [thumbsSwiper]);
+
+  return (
+    <div className={styles.container}>
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        direction="vertical"
+        slidesPerView={'auto'}
+        spaceBetween={16}
+        modules={[Thumbs]}
+        className={styles.thumbs}
+      >
+        {product.images.map((img, i) => (
+          <SwiperSlide key={i} className={styles.thumbs__slide}>
+            <img src={img} alt={`thumb-${i}`} className={styles.thumbs__img} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <Swiper
+        modules={[Thumbs, Navigation]}
+        thumbs={{ swiper: thumbsSwiper }}
+        className={styles.main}
+      >
+        {product.images.map((img, i) => (
+          <SwiperSlide key={i}>
+            <img src={img} alt={`main-${i}`} className={styles.main__img} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};

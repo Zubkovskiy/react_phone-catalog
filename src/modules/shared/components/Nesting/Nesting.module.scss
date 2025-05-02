@@ -14,7 +14,6 @@
 
 .home, .arrow {
   display: flex;
-  cursor: pointer;
 
   &::before {
     display: inline-block;
@@ -24,6 +23,8 @@
 }
 
 .home {
+  cursor: pointer;
+
   &::before {
     content: url('/img/icons/home.svg');
   }

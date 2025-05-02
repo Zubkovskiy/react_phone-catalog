@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react';
 import { goods } from '../../services/goods';
 import { Loader } from '../shared/components/Loader';
 import { Product } from '../../types/Product';
+import { Slider } from './components/Slider';
 
 export const ProductDetailsPage = () => {
   const [product, setProduct] = useState<Product>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const { category, id } = useParams();
 
   useEffect(() => {
@@ -49,13 +51,15 @@ export const ProductDetailsPage = () => {
 
   return (
     <div>
-      <Nesting category={category as string} name={id} />
+      <Nesting category={category as string} name={product.name} />
 
       <Link to={`/${category}`} className={styles.back}>
         Back
       </Link>
 
       <h1 className={styles.name}>{product.name}</h1>
+
+      <Slider product={product} />
     </div>
   );
 };
