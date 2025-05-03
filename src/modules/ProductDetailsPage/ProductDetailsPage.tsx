@@ -8,6 +8,7 @@ import { goods } from '../../services/goods';
 import { Loader } from '../shared/components/Loader';
 import { Product } from '../../types/Product';
 import { Slider } from './components/Slider';
+import { SettingsSlider } from './components/SettingsSlider';
 
 export const ProductDetailsPage = () => {
   const [product, setProduct] = useState<Product>();
@@ -59,7 +60,10 @@ export const ProductDetailsPage = () => {
 
       <h1 className={styles.name}>{product.name}</h1>
 
-      <Slider product={product} />
+      <div className={styles.slider_wrapper}>
+        <Slider product={product} />
+        <SettingsSlider />
+      </div>
     </div>
   );
 };

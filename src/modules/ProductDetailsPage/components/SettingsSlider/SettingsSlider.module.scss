@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--gray-secondary);
+}
+
+.list {
+  display: flex;
+  gap: 16px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  outline: 2px solid #1a1a1a;
+  cursor: pointer;
+  transition: border 0.2s, outline 0.2s;
+}
+
+.active {
+  border: 2px solid white;
+  outline: 2px solid #8e44ff;
+}
