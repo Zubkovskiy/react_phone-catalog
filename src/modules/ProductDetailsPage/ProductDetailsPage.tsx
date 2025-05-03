@@ -3,35 +3,17 @@ import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Link, useParams } from 'react-router-dom';
 
 import styles from './ProductDetailsPage.module.scss';
-import { useEffect, useState } from 'react';
-import { goods } from '../../services/goods';
 import { Loader } from '../shared/components/Loader';
-import { Product } from '../../types/Product';
 import { Slider } from './components/Slider';
 import { SettingsSlider } from './components/SettingsSlider';
+import { useProductDetails } from '../shared/hooks/useProductDetails';
 
 export const ProductDetailsPage = () => {
-  const [product, setProduct] = useState<Product>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const { category, id } = useParams();
-
-  useEffect(() => {
-    setLoading(true);
-    goods
-      .productDetailsFetch(category as string, id as string)
-      .then(data => {
-        setProduct(data);
-        setError(null);
-      })
-      .catch(() => {
-        setError('Failed to load product');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [category, id, setProduct]);
+  const { product, colors, capacities, loading, error } = useProductDetails(
+    category,
+    id,
+  );
 
   if (loading) {
     return <Loader />;
@@ -62,7 +44,11 @@ export const ProductDetailsPage = () => {
 
       <div className={styles.slider_wrapper}>
         <Slider product={product} />
-        <SettingsSlider />
+        <SettingsSlider
+          product={product}
+          colors={colors}
+          capacities={capacities}
+        />
       </div>
     </div>
   );

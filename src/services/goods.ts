@@ -29,18 +29,7 @@ export const goods = {
     });
   },
 
-  productDetailsFetch: async (
-    category: string,
-    id: string,
-  ): Promise<Product> => {
-    const product = await getData<Product[]>(`/${category}.json`);
-
-    const productDetails = product.find(item => item.id === id);
-
-    if (!productDetails) {
-      throw new Error(`Product with id ${id} not found`);
-    }
-
-    return productDetails;
+  productDetailsFetch: async (category: string): Promise<Product[]> => {
+    return getData<Product[]>(`/${category}.json`);
   },
 };

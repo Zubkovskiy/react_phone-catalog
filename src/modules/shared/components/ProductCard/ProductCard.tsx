@@ -4,8 +4,8 @@ import { NormalizedProduct } from '../../../../types/NormalizedProduct';
 
 import styles from './ProductCard.module.scss';
 
-import favorite from '/img/icons/favourites.svg';
 import { Link } from 'react-router-dom';
+import { ButtonsCart } from '../ButtonsCart';
 
 type Props = {
   model: NormalizedProduct;
@@ -48,12 +48,8 @@ export const ProductCard: React.FC<Props> = ({ model, discount }) => {
             <div className={styles.right}>{addSpace(model.ram)}</div>
           </div>
         </div>
-        <div className={styles.buttons}>
-          <div className={styles.cart}>Add to cart</div>
-          <div className={`${styles.button} ${styles.favorite}`}>
-            <img src={favorite} alt="add to favorite" />
-          </div>
-        </div>
+
+        <ButtonsCart />
       </div>
     </div>
   );
