@@ -1,8 +1,9 @@
 .product {
   &__amount_models {
     margin-top: 8px;
-    font-weight: 600;
+
     font-size: 14px;
+    font-weight: 600;
     line-height: 150%;
     color: var(--gray-secondary);
   }
@@ -16,11 +17,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 176px;
     height: 40px;
-    background: var(--gray-surface-1);
-    color: #fff;
     border: none;
+
+    color: #fff;
+
+    background: var(--gray-surface-1);
   }
 
   &__cards {

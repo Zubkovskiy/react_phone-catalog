@@ -2,25 +2,30 @@
 
 .buttons {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   margin-top: 8px;
 }
 
 .cart {
+  cursor: pointer;
+
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  background: var(--accent);
+
   width: 160px;
   height: 40px;
 
-  font-weight: 700;
   font-size: 14px;
+  font-weight: 700;
   line-height: 150%;
-  text-align: center;
   color: var(--gray-white);
-  cursor: pointer;
+  text-align: center;
+
+  background: var(--accent);
+
   transition: var(--transition);
 
   &:hover {
@@ -37,13 +42,17 @@
 }
 
 .favorite {
+  cursor: pointer;
+
   display: flex;
-  justify-content: center;
+  flex: 0 0 auto;
   align-items: center;
+  justify-content: center;
+
   width: 40px;
   height: 40px;
+
   background: var(--gray-surface-2);
-  cursor: pointer;
 
   & img {
     cursor: pointer;

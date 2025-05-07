@@ -2,10 +2,11 @@
 
 .wrapper {
   display: flex;
-  align-items: center;
   gap: 8px;
-  padding-top: 24px;
+  align-items: center;
+
   margin-bottom: 40px;
+  padding-top: 24px;
 
   @include respond-to(mobile) {
     margin-bottom: 24px;
@@ -39,15 +40,15 @@
 }
 
 .category {
-  color: var(--gray-secondary);
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-secondary);
   text-transform: capitalize;
 }
 
 .active {
-  color: var(--gray-white);
   cursor: pointer;
+  color: var(--gray-white);
 }
 
 .name {

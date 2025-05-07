@@ -4,20 +4,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   width: 272px;
   height: 506px;
   padding: 32px;
-  background-color: var(--gray-surface-1);
+
   font-family: var(--font-family);
 
+  background-color: var(--gray-surface-1);
+
   .img {
+    cursor: pointer;
+
     display: flex;
+
     height: auto;
     max-height: 196px;
-    object-fit: scale-down;
     margin: 0 auto;
+
+    object-fit: scale-down;
+
     transition: var(--transition);
-    cursor: pointer;
   }
 
   &:hover .img {
@@ -50,11 +57,12 @@
 }
 
 .name {
-  font-weight: 600;
+  cursor: pointer;
+
   font-size: 15px;
+  font-weight: 600;
   line-height: 150%;
   color: var(--gray-white);
-  cursor: pointer;
 
   @include respond-to(tablet) {
     font-size: 14px;
@@ -63,60 +71,66 @@
 
 .price_wrap {
   position: relative;
+
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+
   margin-top: 8px;
 
   &::before {
     content: "";
+
     position: absolute;
     bottom: -8px;
-    height: 1px;
+
     width: 100%;
+    height: 1px;
+
     background-color: var(--gray-elements);
   }
 }
 
 .price {
   position: relative;
-  font-weight: 800;
   font-size: 22px;
+  font-weight: 800;
   line-height: 140%;
 }
 
 .discount {
-  font-weight: 600;
-  font-size: 22px;
-  text-decoration: line-through;
-  color: var(--gray-secondary);
   font-family: var(--font-family);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gray-secondary);
+  text-decoration: line-through;
 }
 
 .characteristics {
   display: flex;
-  justify-content: space-evenly;
   flex-flow: column;
-  margin-top: 16px;
   gap: 8px;
+  justify-content: space-evenly;
+
   height: 77px;
+  margin-top: 16px;
 }
 
 .wrap {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .left {
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
   color: var(--gray-secondary);
 }
 
 .right {
-  font-weight: 700;
   font-size: 12px;
-  text-align: right;
+  font-weight: 700;
   color: var(--gray-white);
+  text-align: right;
 }

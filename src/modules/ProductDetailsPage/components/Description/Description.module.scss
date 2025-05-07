@@ -1,0 +1,82 @@
+@use '../../../shared/utils/mixins';
+
+.description {
+  display: flex;
+  gap: 65px;
+  justify-content: space-between;
+  margin-top: 80px;
+}
+
+.about {
+  max-width: 560px;
+}
+
+.specs {
+  width: 100%;
+}
+
+.name {
+  margin-bottom: 16px;
+
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 140%;
+  color: var(--gray-white);
+}
+
+.wrapper {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-white);
+}
+
+.text {
+  margin-top: 16px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
+  color: var(--gray-secondary);
+
+  & p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+}
+
+.specs_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specs_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
+  color: var(--gray-secondary);
+}
+
+.right {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
+  color: var(--gray-white);
+}
+
+.line {
+  @include mixins.line;
+
+  margin-bottom: 32px;
+}

@@ -21,10 +21,10 @@
 }
 
 * {
+  cursor: url('/img/cursor.svg'), auto;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  cursor: url('/img/cursor.svg'), auto;
 
   &::selection {
     background: var(--accent)
@@ -32,10 +32,10 @@
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--gray-black);
-  color: var(--gray-white);
   height: 100%;
+  font-family: var(--font-family);
+  color: var(--gray-white);
+  background-color: var(--gray-black);
 }
 
 a {
@@ -54,17 +54,17 @@ img {
 .container {
   position: relative;
   max-width: var(--container);
-  margin: 0 auto;
   min-height: calc(100vh - 64px - 96px - 1px);
+  margin: 0 auto;
 
   @include respond-to(tablet) {
-    padding: 0 24px;
     min-height: calc(100vh - 48px - 96px - 1px);
+    padding: 0 24px;
   }
 
   @include respond-to(mobile) {
-    padding: 0 16px;
     min-height: calc(100vh - 48px - 257px - 1px);
+    padding: 0 16px;
   }
 }
 

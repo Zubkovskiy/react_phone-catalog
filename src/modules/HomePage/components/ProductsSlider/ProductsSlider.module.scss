@@ -29,9 +29,10 @@
 
 .models_top {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 72px;
+  align-items: center;
+  justify-content: space-between;
+
   width: 100%;
 }
 
@@ -42,14 +43,18 @@
 
 .prev,
 .next {
+  cursor: pointer;
+
+  z-index: 10;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 32px;
   height: 32px;
+
   background: var(--gray-surface-2);
-  z-index: 10;
-  cursor: pointer;
 
   &:hover {
     background: var(--gray-icons-placeholders);
@@ -68,10 +73,13 @@
 }
 
 .disabled {
-  background: var(--gray-disabled);
-  border: 1px solid var(--gray-elements);
-  z-index: 11;
   pointer-events: none;
-  opacity: 0.5;
   cursor: not-allowed;
+
+  z-index: 11;
+
+  border: 1px solid var(--gray-elements);
+
+  opacity: 0.5;
+  background: var(--gray-disabled);
 }

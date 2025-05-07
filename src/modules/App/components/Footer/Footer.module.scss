@@ -1,38 +1,38 @@
 @use "../../../shared/utils/mixins.scss" as *;
 
 .decor {
-  height: 1px;
   width: 100%;
+  height: 1px;
   background: var(--gray-elements);
 }
 
 .footer {
   position: relative;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin: 0 auto;
   max-width: var(--container);
   height: 96px;
+  margin: 0 auto;
 
   @include respond-to(tablet) {
     padding: 0 24px;
   }
 
   @include respond-to(mobile) {
-    padding: 32px 16px;
-    height: 257px;
-
     flex-direction: column;
     align-items: flex-start;
+    height: 257px;
+    padding: 32px 16px;
   }
 }
 
 .logo {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  cursor: pointer;
   height: 100%;
 
   & img {
@@ -46,19 +46,21 @@
 }
 
 .links {
+  cursor: pointer;
+
   display: flex;
-  align-items: center;
   gap: 106.8px;
+  align-items: center;
 
   height: 100%;
+
   font-family: var(--font-family);
-  font-weight: 800;
   font-size: 12px;
+  font-weight: 800;
   line-height: 92%;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--gray-white);
-  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 
   & a {
     cursor: pointer;
@@ -76,17 +78,21 @@
 
 .scroll {
   display: flex;
-  align-items: center;
   gap: 16px;
+  align-items: center;
 
   &__img_wrap {
+    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 32px;
     height: 32px;
+
     background: var(--gray-surface-2);
-    cursor: pointer;
+
     transition: var(--transition);
 
     & img {
@@ -105,14 +111,14 @@
 
   &__txt {
     font-family: var(--font-family);
-    font-weight: 700;
     font-size: 12px;
-    text-align: right;
+    font-weight: 700;
     color: var(--gray-secondary);
+    text-align: right;
   }
 
   @include respond-to(mobile) {
-    width: 100%;
     justify-content: center;
+    width: 100%;
   }
 }

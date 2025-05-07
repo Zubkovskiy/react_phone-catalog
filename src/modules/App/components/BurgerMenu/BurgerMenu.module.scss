@@ -2,12 +2,13 @@
 
 .container {
   display: none;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   width: 48px;
   height: 48px;
-  border-left: 1px solid var(--gray-elements);
   margin-left: auto;
+  border-left: 1px solid var(--gray-elements);
 
   @include respond-to(mobile) {
     display: flex;
@@ -15,29 +16,36 @@
 }
 
 .burger {
-  background: none;
-  border: none;
+  cursor: pointer;
+
+  z-index: 10;
+
   display: none;
-  justify-content: center;
   flex-direction: column;
   gap: 4px;
-  height: 16px;
+  justify-content: center;
+
   width: 16px;
-  cursor: pointer;
-  z-index: 10;
+  height: 16px;
+  border: none;
+
+  background: none;
+
   animation: var(--transition);
 
   .line {
-    border-radius: 10px;
     width: 14px;
     height: 1.5px;
+    border-radius: 10px;
+
     background-color: var(--gray-white);
+
     transition: all 0.3s ease;
   }
 
   &.open {
-    opacity: 1;
     gap: 0;
+    opacity: 1;
 
     .line:nth-child(1) {
       transform: translateY(1px) rotate(45deg);
@@ -59,34 +67,39 @@
 
 .menu {
   position: absolute;
+  z-index: 5;
   top: 48px;
   right: 0;
-  background: var(--gray-black);
+
+  display: none;
+
   width: 100%;
   height: calc(100vh - 48px);
-  display: none;
-  z-index: 5;
+
   text-align: center;
+
+  background: var(--gray-black);
 
   &.show {
     display: block;
   }
 
   ul {
-    padding: 0;
     margin: 0;
+    padding: 0;
 
     li {
       width: 100%;
       margin: 16px 0;
 
       a {
-        font-weight: 800;
         font-size: 12px;
+        font-weight: 800;
         line-height: 92%;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
         color: var(--gray-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+
         transition: color 0.3s;
       }
     }

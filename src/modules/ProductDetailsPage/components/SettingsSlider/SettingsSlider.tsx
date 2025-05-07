@@ -3,22 +3,18 @@ import styles from './SettingsSlider.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../../../types/Product';
 import { ButtonsCart } from '../../../shared/components/ButtonsCart';
+import classNames from 'classnames';
 
 type Props = {
   product: Product;
-  colors: string[];
-  capacities: string[];
 };
 
-export const SettingsSlider: React.FC<Props> = ({
-  product,
-  colors,
-  capacities,
-}) => {
+export const SettingsSlider: React.FC<Props> = ({ product }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentColor = searchParams.get('color') || colors[0];
-  const currentCapacity = searchParams.get('capacity') || capacities[0];
+  const currentColor = searchParams.get('color') || product.colorsAvailable[0];
+  const currentCapacity =
+    searchParams.get('capacity') || product.capacityAvailable[0];
 
   const [selectedColor, setSelectedColor] = useState(currentColor);
   const [selectedCapacity, setSelectedCapacity] = useState(currentCapacity);
@@ -41,10 +37,10 @@ export const SettingsSlider: React.FC<Props> = ({
 
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>Available colors</h3>
+      <h2 className={styles.title}>Available colors</h2>
       <div className={styles.list}>
-        {colors.map(color => (
-          <button
+        {product.colorsAvailable.map(color => (
+          <div
             key={color}
             className={`${styles.circle} ${selectedColor === color ? styles.active : ''}`}
             style={{ backgroundColor: color }}
@@ -56,14 +52,16 @@ export const SettingsSlider: React.FC<Props> = ({
 
       <h3 className={styles.title}>Select capacity</h3>
       <div className={styles.list}>
-        {capacities.map(capacity => (
-          <button
+        {product.capacityAvailable.map(capacity => (
+          <div
             key={capacity}
-            className={`${styles.capacity} ${selectedCapacity === capacity ? styles.active : ''}`}
+            className={classNames(styles.capacity, {
+              [styles.active]: selectedCapacity === capacity,
+            })}
             onClick={() => setSelectedCapacity(capacity)}
           >
             {capacity}
-          </button>
+          </div>
         ))}
       </div>
       <div className={styles.line}></div>
@@ -74,6 +72,29 @@ export const SettingsSlider: React.FC<Props> = ({
       </div>
 
       <ButtonsCart />
+
+      <div className={styles.characteristics}>
+        <div className={styles.characteristics__items}>
+          <div className={styles.characteristics__left}>Screen</div>
+          <div className={styles.characteristics__right}>{product.screen}</div>
+        </div>
+        <div className={styles.characteristics__items}>
+          <div className={styles.characteristics__left}>Resolution</div>
+          <div className={styles.characteristics__right}>
+            {product.resolution}
+          </div>
+        </div>
+        <div className={styles.characteristics__items}>
+          <div className={styles.characteristics__left}>Processor</div>
+          <div className={styles.characteristics__right}>
+            {product.processor}
+          </div>
+        </div>
+        <div className={styles.characteristics__items}>
+          <div className={styles.characteristics__left}>RAM</div>
+          <div className={styles.characteristics__right}>{product.ram}</div>
+        </div>
+      </div>
     </div>
   );
 };

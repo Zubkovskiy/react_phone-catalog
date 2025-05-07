@@ -1,7 +1,7 @@
 .title {
   margin-bottom: 4px;
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
   color: var(--gray-secondary);
 }
 
@@ -12,16 +12,21 @@
 }
 
 .selectButton {
+  cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   width: 176px;
   height: 40px;
   padding: 0 12px;
   border: 1px solid transparent;
+
   font-weight: bold;
-  cursor: pointer;
+
   background: var(--gray-surface-2);
+
   transition: all 0.3s ease-in-out;
 
   &:hover {
@@ -34,8 +39,8 @@
 }
 
 .text {
-  color: #fff;
   cursor: pointer;
+  color: #fff;
 }
 
 .arrow {
@@ -43,10 +48,14 @@
 
   &::before {
     content: '';
+
     display: flex;
+
     width: 16px;
     height: 16px;
+
     color: var(--gray-secondary);
+
     background-color: currentColor;
   }
 
@@ -64,38 +73,47 @@
 }
 
 .optionsList {
-  border: 1px solid var(--gray-elements);
-  margin-top: 4px;
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(-10px);
-  overflow: hidden;
   pointer-events: none;
-  transition: all 0.3s ease-in-out;
-  background: var(--gray-black);
-  width: 100%;
+
   position: absolute;
   z-index: 10;
+  transform: translateY(-10px);
+
+  overflow: hidden;
+
+  width: 100%;
+  max-height: 0;
+  margin-top: 4px;
+  border: 1px solid var(--gray-elements);
+
+  opacity: 0;
+  background: var(--gray-black);
+
+  transition: all 0.3s ease-in-out;
 }
 
 .optionsListVisible {
+  pointer-events: auto;
+  transform: translateY(0);
   max-height: 500px;
   opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
 }
 
 .option {
+  cursor: pointer;
+
   display: flex;
   align-items: center;
-  padding-left: 12px;
+
   height: 32px;
-  cursor: pointer;
+  padding-left: 12px;
+
   color: var(--gray-secondary);
+
   transition: all 0.2s ease;
 
   &:hover {
-    background: var(--gray-surface-2);
     color: var(--gray-white);
+    background: var(--gray-surface-2);
   }
 }

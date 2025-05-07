@@ -6,14 +6,39 @@ import styles from './ProductDetailsPage.module.scss';
 import { Loader } from '../shared/components/Loader';
 import { Slider } from './components/Slider';
 import { SettingsSlider } from './components/SettingsSlider';
-import { useProductDetails } from '../shared/hooks/useProductDetails';
+import { useEffect, useState } from 'react';
+import { goods } from '../../services/goods';
+import { Product } from '../../types/Product';
+import { Description } from './components/Description';
 
 export const ProductDetailsPage = () => {
   const { category, id } = useParams();
-  const { product, colors, capacities, loading, error } = useProductDetails(
-    category,
-    id,
-  );
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLoading(true);
+    goods
+      .productDetailsFetch(category as string)
+      .then(data => {
+        const foundProduct = data.find(item => item.id === id) as
+          | Product
+          | undefined;
+
+        if (foundProduct !== undefined) {
+          setProduct(foundProduct);
+        } else {
+          setError('Product not found');
+        }
+      })
+      .catch(() => {
+        setError('Failed to load product details');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [category, id]);
 
   if (loading) {
     return <Loader />;
@@ -44,12 +69,10 @@ export const ProductDetailsPage = () => {
 
       <div className={styles.slider_wrapper}>
         <Slider product={product} />
-        <SettingsSlider
-          product={product}
-          colors={colors}
-          capacities={capacities}
-        />
+        <SettingsSlider product={product} />
       </div>
+
+      <Description product={product} />
     </div>
   );
 };
