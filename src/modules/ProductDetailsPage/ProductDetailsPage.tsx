@@ -10,12 +10,15 @@ import { useEffect, useState } from 'react';
 import { goods } from '../../services/goods';
 import { Product } from '../../types/Product';
 import { Description } from './components/Description';
+import { ProductsSlider } from '../shared/components/ProductsSlider';
+import { Model } from '../../types/Model';
 
 export const ProductDetailsPage = () => {
   const { category, id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [randomProducts, setRandomProducts] = useState<Model[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -39,6 +42,19 @@ export const ProductDetailsPage = () => {
         setLoading(false);
       });
   }, [category, id]);
+
+  useEffect(() => {
+    setLoading(true);
+    goods
+      .getSuggestedProducts()
+      .then(setRandomProducts)
+      .catch(() => {
+        setError('Failed to load product details');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [product]);
 
   if (loading) {
     return <Loader />;
@@ -73,6 +89,14 @@ export const ProductDetailsPage = () => {
       </div>
 
       <Description product={product} />
+
+      <div className={styles.products_slider}>
+        <ProductsSlider
+          models={randomProducts}
+          title="You may also like"
+          discount
+        />
+      </div>
     </div>
   );
 };

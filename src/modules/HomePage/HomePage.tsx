@@ -7,7 +7,7 @@ import { Categorys } from './components/Categorys/Categorys';
 import { useEffect, useState } from 'react';
 import { goods } from '../../services/goods';
 import { Model } from '../../types/Model';
-import { ProductsSlider } from './components/ProductsSlider';
+import { ProductsSlider } from '../shared/components/ProductsSlider';
 
 import global from '../shared/globalStyles.module.scss';
 import styles from './HomePage.module.scss';

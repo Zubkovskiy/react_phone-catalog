@@ -32,4 +32,10 @@ export const goods = {
   productDetailsFetch: async (category: string): Promise<Product[]> => {
     return getData<Product[]>(`/${category}.json`);
   },
+
+  getSuggestedProducts: async (): Promise<Model[]> => {
+    const products = await getData<Model[]>('/products.json');
+
+    return products.sort(() => Math.random() - 0.5).slice(0, 8);
+  },
 };

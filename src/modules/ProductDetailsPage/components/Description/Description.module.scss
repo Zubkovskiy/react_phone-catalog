@@ -24,7 +24,7 @@
   color: var(--gray-white);
 }
 
-.wrapper {
+.wrapper:not(:last-child) {
   margin-bottom: 32px;
 }
 

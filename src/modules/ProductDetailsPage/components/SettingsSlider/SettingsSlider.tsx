@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 import styles from './SettingsSlider.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../../../types/Product';
@@ -10,30 +9,20 @@ type Props = {
 };
 
 export const SettingsSlider: React.FC<Props> = ({ product }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentColor = searchParams.get('color') || product.colorsAvailable[0];
-  const currentCapacity =
-    searchParams.get('capacity') || product.capacityAvailable[0];
-
-  const [selectedColor, setSelectedColor] = useState(currentColor);
-  const [selectedCapacity, setSelectedCapacity] = useState(currentCapacity);
+  const [selectedColor, setSelectedColor] = useState(
+    product.colorsAvailable[0],
+  );
+  const [selectedCapacity, setSelectedCapacity] = useState(
+    product.capacityAvailable[0],
+  );
 
   useEffect(() => {
-    const newParams = new URLSearchParams(searchParams);
-
-    newParams.set('color', selectedColor);
-    newParams.set('capacity', selectedCapacity);
-    setSearchParams(newParams);
-  }, [selectedColor, selectedCapacity, setSearchParams, searchParams]);
+    setSelectedColor(product.colorsAvailable[0]);
+  }, [product.colorsAvailable]);
 
   useEffect(() => {
-    setSelectedColor(currentColor);
-  }, [currentColor]);
-
-  useEffect(() => {
-    setSelectedCapacity(currentCapacity);
-  }, [currentCapacity]);
+    setSelectedCapacity(product.capacityAvailable[0]);
+  }, [product.capacityAvailable]);
 
   return (
     <div className={styles.wrapper}>
