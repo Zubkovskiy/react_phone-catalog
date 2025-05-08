@@ -15,12 +15,15 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ model, discount }) => {
   return (
     <div className={styles.model}>
-      <Link to={`/${model.category}/${model.id}`}>
+      <Link to={`/${model.category}/${model.itemId || model.id}`}>
         <img src={model.image} alt={model.name} className={styles.img} />
       </Link>
 
       <div className={styles.down}>
-        <Link to={`/${model.category}/${model.id}`} className={styles.name}>
+        <Link
+          to={`/${model.category}/${model.itemId || model.id}`}
+          className={styles.name}
+        >
           {model.name}
         </Link>
         <div className={styles.price_wrap}>

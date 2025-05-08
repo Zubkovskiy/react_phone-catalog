@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
-import { Navigation, Thumbs } from 'swiper/modules';
+import { Thumbs } from 'swiper/modules';
 
 import styles from './Slider.module.scss';
-
 import { Product } from '../../../../types/Product';
 
 import 'swiper/css';
@@ -19,20 +17,17 @@ type Props = {
 export const Slider: React.FC<Props> = ({ product }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
-  useEffect(() => {
-    if (thumbsSwiper) {
-      thumbsSwiper.slideTo(0);
-    }
-  }, [thumbsSwiper]);
-
   return (
     <div className={styles.container}>
       <Swiper
         onSwiper={setThumbsSwiper}
         direction="vertical"
-        slidesPerView={'auto'}
+        slidesPerView="auto"
         spaceBetween={16}
         modules={[Thumbs]}
+        watchSlidesProgress
+        watchOverflow
+        initialSlide={0}
         className={styles.thumbs}
       >
         {product.images.map((img, i) => (
@@ -43,8 +38,13 @@ export const Slider: React.FC<Props> = ({ product }) => {
       </Swiper>
 
       <Swiper
-        modules={[Thumbs, Navigation]}
-        thumbs={{ swiper: thumbsSwiper }}
+        modules={[Thumbs]}
+        thumbs={{
+          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+        }}
+        watchSlidesProgress
+        watchOverflow
+        initialSlide={0}
         className={styles.main}
       >
         {product.images.map((img, i) => (

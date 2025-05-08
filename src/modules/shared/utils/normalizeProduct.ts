@@ -8,6 +8,7 @@ export const normalizeProduct = (
   if ('namespaceId' in product) {
     return {
       id: product.id,
+      namespaceId: product.namespaceId,
       name: product.name,
       fullPrice: product.priceRegular,
       price: product.priceDiscount,
