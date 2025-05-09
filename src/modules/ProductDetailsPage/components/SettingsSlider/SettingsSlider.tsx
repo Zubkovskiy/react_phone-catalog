@@ -1,28 +1,33 @@
-import styles from './SettingsSlider.module.scss';
 import React, { useEffect, useState } from 'react';
+import styles from './SettingsSlider.module.scss';
 import { Product } from '../../../../types/Product';
 import { ButtonsCart } from '../../../shared/components/ButtonsCart';
 import classNames from 'classnames';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getBaseId } from '../../../shared/utils/getBaseId';
 
 type Props = {
   product: Product;
 };
 
 export const SettingsSlider: React.FC<Props> = ({ product }) => {
-  const [selectedColor, setSelectedColor] = useState(
-    product.colorsAvailable[0],
-  );
-  const [selectedCapacity, setSelectedCapacity] = useState(
-    product.capacityAvailable[0],
-  );
+  const [selectedColor, setSelectedColor] = useState(product.color);
+  const [selectedCapacity, setSelectedCapacity] = useState(product.capacity);
+
+  const navigate = useNavigate();
+  const { category } = useParams();
 
   useEffect(() => {
-    setSelectedColor(product.colorsAvailable[0]);
-  }, [product.colorsAvailable]);
+    setSelectedColor(product.color);
+    setSelectedCapacity(product.capacity);
+  }, [product]);
 
-  useEffect(() => {
-    setSelectedCapacity(product.capacityAvailable[0]);
-  }, [product.capacityAvailable]);
+  const handleChange = (newColor: string, newCapacity: string) => {
+    const baseId = getBaseId(product.id, product.capacity, product.color);
+    const newId = `${baseId}-${newCapacity}-${newColor}`.toLowerCase();
+
+    navigate(`/${category}/${encodeURIComponent(newId)}`);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -31,9 +36,11 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
         {product.colorsAvailable.map(color => (
           <div
             key={color}
-            className={`${styles.circle} ${selectedColor === color ? styles.active : ''}`}
+            className={classNames(styles.circle, {
+              [styles.active]: selectedColor === color,
+            })}
             style={{ backgroundColor: color }}
-            onClick={() => setSelectedColor(color)}
+            onClick={() => handleChange(color, selectedCapacity)}
           />
         ))}
       </div>
@@ -47,7 +54,7 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
             className={classNames(styles.capacity, {
               [styles.active]: selectedCapacity === capacity,
             })}
-            onClick={() => setSelectedCapacity(capacity)}
+            onClick={() => handleChange(selectedColor, capacity)}
           >
             {capacity}
           </div>
