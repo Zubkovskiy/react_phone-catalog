@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBaseId } from '../../../shared/utils/getBaseId';
 
+const normalize = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
+
 type Props = {
   product: Product;
 };
@@ -23,10 +25,10 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
   }, [product]);
 
   const handleChange = (newColor: string, newCapacity: string) => {
-    const baseId = getBaseId(product.id, product.capacity, product.color);
-    const newId = `${baseId}-${newCapacity}-${newColor}`.toLowerCase();
+    const baseId = getBaseId(product.id, product.color, product.capacity);
+    const newId = `${baseId}-${normalize(newCapacity)}-${normalize(newColor)}`;
 
-    navigate(`/${category}/${encodeURIComponent(newId)}`);
+    navigate(`/${category}/${newId}`);
   };
 
   return (
@@ -44,6 +46,7 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
           />
         ))}
       </div>
+
       <div className={styles.line}></div>
 
       <h3 className={styles.title}>Select capacity</h3>
@@ -60,6 +63,7 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
           </div>
         ))}
       </div>
+
       <div className={styles.line}></div>
 
       <div className={styles.price}>

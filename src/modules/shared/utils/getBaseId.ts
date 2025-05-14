@@ -1,29 +1,34 @@
+const normalize = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
+
 export const getBaseId = (
-  id: string,
-  originalCapacity: string,
-  originalColor: string,
-) => {
-  const normalize = (str: string) => str.toLowerCase().replace(/\s+/g, '');
+  productId: string,
+  currentColor: string,
+  currentCapacity: string,
+): string => {
+  const parts = productId.split('-');
+  const normalizedColorParts = normalize(currentColor).split('-');
+  const normalizedCapacityParts = normalize(currentCapacity).split('-');
 
-  const parts = id.split('-');
+  const removeSequence = (arr: string[], sequence: string[]): string[] => {
+    const result: string[] = [];
 
-  const last = normalize(parts[parts.length - 1]);
+    for (let i = 0; i < arr.length; ) {
+      const match = sequence.every((val, idx) => arr[i + idx] === val);
 
-  const originalColorNorm = normalize(originalColor);
-  const originalCapacityNorm = normalize(originalCapacity);
+      if (match) {
+        i += sequence.length;
+      } else {
+        result.push(arr[i]);
+        i++;
+      }
+    }
 
-  const filteredParts = [...parts];
+    return result;
+  };
 
-  if (last === originalColorNorm) {
-    filteredParts.pop();
-  }
+  let cleaned = removeSequence(parts, normalizedColorParts);
 
-  if (
-    filteredParts.length > 0 &&
-    normalize(filteredParts[filteredParts.length - 1]) === originalCapacityNorm
-  ) {
-    filteredParts.pop();
-  }
+  cleaned = removeSequence(cleaned, normalizedCapacityParts);
 
-  return filteredParts.join('-');
+  return cleaned.join('-');
 };
