@@ -1,36 +1,48 @@
-import { Product } from '../../../../types/Product';
-import { normalizeProduct } from '../../../shared/utils/normalizeProduct';
 import { ProductCard } from '../../../shared/components/ProductCard';
 import { useSearchParams } from 'react-router-dom';
 
 import styles from './ProductCards.module.scss';
+import { Model } from '../../../../types/Model';
 
 type Props = {
-  model: Product[];
+  model: Model[];
 };
 
 export const ProductCards: React.FC<Props> = ({ model }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const sortParam = searchParams.get('sort') || 'age';
+
+  const sortedModel = [...model].sort((a, b) => {
+    switch (sortParam) {
+      case 'Alphabetically':
+        return a.name.localeCompare(b.name);
+      case 'Cheapest':
+        return a.price - b.price;
+      case 'Newest':
+      default:
+        return b.year - a.year;
+    }
+  });
+
   const pageFromParams = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || '16';
   const PRODUCTS_PER_PAGE =
-    perPageParam === 'all' ? model.length : Number(perPageParam);
+    perPageParam === 'all' ? sortedModel.length : Number(perPageParam);
 
-  const totalPages = Math.ceil(model.length / PRODUCTS_PER_PAGE);
+  const totalPages = Math.ceil(sortedModel.length / PRODUCTS_PER_PAGE);
   const currentPage = Math.min(Math.max(pageFromParams, 1), totalPages);
 
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
   const endIndex = startIndex + PRODUCTS_PER_PAGE;
 
-  const visibleProducts = model.slice(startIndex, endIndex);
+  const visibleProducts = sortedModel.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       const newParams = new URLSearchParams(searchParams);
 
       newParams.set('page', page.toString());
-
       setSearchParams(newParams);
       window.scrollTo({ top: 0 });
     }
@@ -43,26 +55,24 @@ export const ProductCards: React.FC<Props> = ({ model }) => {
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
+    } else if (currentPage <= 3) {
+      pages.push(1, 2, 3, 4, 5);
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(
+        totalPages - 4,
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages,
+      );
     } else {
-      if (currentPage <= 3) {
-        pages.push(1, 2, 3, 4, 5);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(
-          totalPages - 4,
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages,
-        );
-      } else {
-        pages.push(
-          currentPage - 2,
-          currentPage - 1,
-          currentPage,
-          currentPage + 1,
-          currentPage + 2,
-        );
-      }
+      pages.push(
+        currentPage - 2,
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
+        currentPage + 2,
+      );
     }
 
     return pages;
@@ -72,7 +82,7 @@ export const ProductCards: React.FC<Props> = ({ model }) => {
     <>
       <div className={styles.cards}>
         {visibleProducts.map(item => (
-          <ProductCard key={item.id} model={normalizeProduct(item)} />
+          <ProductCard key={item.id} model={item} />
         ))}
       </div>
 

@@ -1,53 +1,72 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './ControlsPanel.module.scss';
 import { CustomSelect } from '../CustomSelect';
 
-const options1 = ['Newest', 'Alphabetically', 'Cheapest'];
-const options2 = ['4', '8', '16', 'all'];
+const SORT_OPTIONS = ['Newest', 'Alphabetically', 'Cheapest'];
+const PER_PAGE_OPTIONS = ['4', '8', '16', 'all'];
 
 export const ControlsPanel: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const prevSortRef = useRef(searchParams.get('sort'));
 
-  const [selected, setSelected] = useState('Newest');
-  const [numberOfPages, setNumberOfPages] = useState('16');
+  const [sort, setSort] = useState(SORT_OPTIONS[0]);
+  const [perPage, setPerPage] = useState(PER_PAGE_OPTIONS[2]);
 
   useEffect(() => {
     const sortParam = searchParams.get('sort');
     const perPageParam = searchParams.get('perPage');
 
-    if (sortParam && options1.includes(sortParam)) {
-      setSelected(sortParam);
+    if (sortParam && SORT_OPTIONS.includes(sortParam)) {
+      setSort(sortParam);
     }
 
-    if (perPageParam && options2.includes(perPageParam)) {
-      setNumberOfPages(perPageParam);
+    if (perPageParam && PER_PAGE_OPTIONS.includes(perPageParam)) {
+      setPerPage(perPageParam);
     }
   }, [searchParams]);
 
-  const updateSearchParam = (key: string, value: string) => {
-    searchParams.set(key, value);
-    setSearchParams(searchParams);
+  useEffect(() => {
+    const currentSort = searchParams.get('sort');
+    const currentPage = searchParams.get('page');
+
+    if (prevSortRef.current !== currentSort && currentPage !== '1') {
+      prevSortRef.current = currentSort;
+      const newParams = new URLSearchParams(searchParams);
+
+      newParams.set('page', '1');
+      setSearchParams(newParams);
+
+      window.scrollTo({ top: 0 });
+    }
+  }, [searchParams, setSearchParams]);
+
+  const updateParam = (key: string, value: string) => {
+    const updatedParams = new URLSearchParams(searchParams);
+
+    updatedParams.set(key, value);
+    setSearchParams(updatedParams);
   };
 
   return (
     <div className={styles.panel}>
       <CustomSelect
         title="Sort by"
-        options={options1}
-        selected={selected}
+        options={SORT_OPTIONS}
+        selected={sort}
         onSelect={value => {
-          setSelected(value);
-          updateSearchParam('sort', value);
+          setSort(value);
+          updateParam('sort', value);
         }}
       />
+
       <CustomSelect
         title="Items on page"
-        options={options2}
-        selected={numberOfPages}
+        options={PER_PAGE_OPTIONS}
+        selected={perPage}
         onSelect={value => {
-          setNumberOfPages(value);
-          updateSearchParam('perPage', value);
+          setPerPage(value);
+          updateParam('perPage', value);
         }}
       />
     </div>

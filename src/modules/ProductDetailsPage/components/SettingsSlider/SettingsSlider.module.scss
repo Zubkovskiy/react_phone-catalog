@@ -70,11 +70,10 @@
 }
 
 .capacity.active {
+  display: flex;
+  align-items: center;
   border: none;
-
   color: var(--gray-black);
-  text-align: center;
-
   background: var(--gray-white);
   outline: none;
 }
