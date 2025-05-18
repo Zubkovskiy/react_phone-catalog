@@ -1,14 +1,14 @@
 import React from 'react';
 import { addSpace } from '../../../HomePage/components/utils/addSpace';
-import { NormalizedProduct } from '../../../../types/NormalizedProduct';
 
 import styles from './ProductCard.module.scss';
 
 import { Link } from 'react-router-dom';
-import { ButtonsCart } from '../ButtonsCart';
+import { Model } from '../../../../types/Model';
+import { ButtonsCard } from '../ButtonsCard';
 
 type Props = {
-  model: NormalizedProduct;
+  model: Model;
   discount?: boolean;
 };
 
@@ -52,7 +52,7 @@ export const ProductCard: React.FC<Props> = ({ model, discount }) => {
           </div>
         </div>
 
-        <ButtonsCart />
+        <ButtonsCard model={model} />
       </div>
     </div>
   );

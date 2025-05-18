@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductCard } from '../ProductCard';
 
 import { Navigation } from 'swiper/modules';
 
@@ -13,6 +12,7 @@ import 'swiper/css/navigation';
 
 import global from '../../../shared/globalStyles.module.scss';
 import styles from './ProductsSlider.module.scss';
+import { ProductCard } from '../ProductCard';
 
 type Props = {
   models: Model[];

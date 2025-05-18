@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { ProductCards } from './components/ProductCards/ProductCards';
 import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Loader } from '../shared/components/Loader';
 import { getData } from '../../utils/httpClient';
@@ -10,6 +9,7 @@ import { ControlsPanel } from './components/ControlsPanel';
 
 import globalStyles from '../shared/globalStyles.module.scss';
 import styles from './ProductPage.module.scss';
+import { ProductCarts } from './components/ProductCards';
 
 export const ProductPage: React.FC = () => {
   const [allModels, setAllModels] = useState<Model[]>([]);
@@ -67,7 +67,7 @@ export const ProductPage: React.FC = () => {
       <ControlsPanel />
 
       <div className={styles.product__cards}>
-        <ProductCards model={filteredModels} />
+        <ProductCarts model={filteredModels} />
       </div>
     </div>
   );

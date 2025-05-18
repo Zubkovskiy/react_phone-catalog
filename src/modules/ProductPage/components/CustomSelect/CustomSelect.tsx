@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import classNames from 'classnames';
 import styles from './CustomSelect.module.scss';
 import { useDropdown } from '../../../shared/hooks/useDropdown';
 
@@ -22,21 +23,24 @@ export const CustomSelect: FC<CustomSelectProps> = ({
       <p className={styles.title}>{title}</p>
       <div className={styles.selectContainer} ref={dropdown.ref}>
         <div
-          className={`${styles.selectButton} ${dropdown.isOpen ? styles.focus : ''}`}
+          className={classNames(styles.selectButton, {
+            [styles.focus]: dropdown.isOpen,
+          })}
           onClick={dropdown.toggle}
         >
           <span className={styles.text}>{selected}</span>
           <div
-            className={`${styles.arrow} ${
-              dropdown.isOpen ? styles.arrow_up : styles.arrow_down
-            }`}
+            className={classNames(styles.arrow, {
+              [styles.arrow_up]: dropdown.isOpen,
+              [styles.arrow_down]: !dropdown.isOpen,
+            })}
           />
         </div>
 
         <ul
-          className={`${styles.optionsList} ${
-            dropdown.isOpen ? styles.optionsListVisible : ''
-          }`}
+          className={classNames(styles.optionsList, {
+            [styles.optionsListVisible]: dropdown.isOpen,
+          })}
         >
           {options.map((option, i) => (
             <li

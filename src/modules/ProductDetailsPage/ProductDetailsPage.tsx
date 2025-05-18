@@ -3,7 +3,6 @@ import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Link, useParams } from 'react-router-dom';
 
 import styles from './ProductDetailsPage.module.scss';
-// import { Loader } from '../shared/components/Loader';
 import { Slider } from './components/Slider';
 import { SettingsSlider } from './components/SettingsSlider';
 import { useEffect, useState } from 'react';
@@ -55,10 +54,6 @@ export const ProductDetailsPage = () => {
         setLoading(false);
       });
   }, [product]);
-
-  // if (loading) {
-  //   return <Loader />;
-  // }
 
   if (error && !loading) {
     return (

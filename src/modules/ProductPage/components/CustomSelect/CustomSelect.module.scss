@@ -5,44 +5,6 @@
   color: var(--gray-secondary);
 }
 
-.selectContainer {
-  position: relative;
-  width: 176px;
-  height: 40px;
-}
-
-.selectButton {
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 176px;
-  height: 40px;
-  padding: 0 12px;
-  border: 1px solid transparent;
-
-  font-weight: bold;
-
-  background: var(--gray-surface-2);
-
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    border: var(--gray-icons-placeholders);
-  }
-
-  &:focus {
-    border: 1px solid var(--accent);
-  }
-}
-
-.text {
-  cursor: pointer;
-  color: #fff;
-}
-
 .arrow {
   cursor: pointer;
 
@@ -66,6 +28,48 @@
   &_down::before {
     mask-image: url('/img/icons/arrow-down.svg');
   }
+}
+
+.selectContainer {
+  position: relative;
+  width: 176px;
+  height: 40px;
+
+  &:hover .arrow {
+    filter: opacity(50%);
+  }
+}
+
+.selectButton {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 176px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+
+  font-weight: bold;
+
+  background: var(--gray-surface-2);
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    border: 1px solid var(--gray-icons-placeholders);
+  }
+
+  &:focus {
+    outline: 1px solid var(--accent);
+  }
+}
+
+.text {
+  cursor: pointer;
+  color: #fff;
 }
 
 .focus {

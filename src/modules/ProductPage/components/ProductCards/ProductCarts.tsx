@@ -1,14 +1,14 @@
-import { ProductCard } from '../../../shared/components/ProductCard';
 import { useSearchParams } from 'react-router-dom';
 
-import styles from './ProductCards.module.scss';
+import styles from './ProductCarts.module.scss';
 import { Model } from '../../../../types/Model';
+import { ProductCard } from '../../../shared/components/ProductCard';
 
 type Props = {
   model: Model[];
 };
 
-export const ProductCards: React.FC<Props> = ({ model }) => {
+export const ProductCarts: React.FC<Props> = ({ model }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortParam = searchParams.get('sort') || 'age';
@@ -80,9 +80,9 @@ export const ProductCards: React.FC<Props> = ({ model }) => {
 
   return (
     <>
-      <div className={styles.cards}>
+      <div className={styles.carts}>
         {visibleProducts.map(item => (
-          <ProductCard key={item.id} model={item} />
+          <ProductCard key={item.id} model={item} discount />
         ))}
       </div>
 

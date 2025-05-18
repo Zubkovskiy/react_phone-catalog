@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './SettingsSlider.module.scss';
 import { Product } from '../../../../types/Product';
-import { ButtonsCart } from '../../../shared/components/ButtonsCart';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBaseId } from '../../../shared/utils/getBaseId';
+import { Model } from '../../../../types/Model';
+import { ButtonsCard } from '../../../shared/components/ButtonsCard';
 
 const normalize = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
 
@@ -71,7 +72,7 @@ export const SettingsSlider: React.FC<Props> = ({ product }) => {
         <div className={styles.price__regular}>${product.priceRegular}</div>
       </div>
 
-      <ButtonsCart />
+      <ButtonsCard model={product as unknown as Model} />
 
       <div className={styles.characteristics}>
         <div className={styles.characteristics__items}>
