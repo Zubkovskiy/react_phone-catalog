@@ -6,9 +6,10 @@ import { ProductCard } from '../../../shared/components/ProductCard';
 
 type Props = {
   model: Model[];
+  pagination?: boolean;
 };
 
-export const ProductCarts: React.FC<Props> = ({ model }) => {
+export const ProductCarts: React.FC<Props> = ({ model, pagination }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortParam = searchParams.get('sort') || 'age';
@@ -86,7 +87,7 @@ export const ProductCarts: React.FC<Props> = ({ model }) => {
         ))}
       </div>
 
-      {perPageParam !== 'all' && (
+      {pagination && perPageParam !== 'all' && (
         <div className={styles.pagination}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}

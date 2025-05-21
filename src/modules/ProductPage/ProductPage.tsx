@@ -9,7 +9,8 @@ import { ControlsPanel } from './components/ControlsPanel';
 
 import globalStyles from '../shared/globalStyles.module.scss';
 import styles from './ProductPage.module.scss';
-import { ProductCarts } from './components/ProductCards';
+import { ProductCarts } from '../shared/components/ProductCards';
+import { AmountModels } from '../shared/components/AmountModels';
 
 export const ProductPage: React.FC = () => {
   const [allModels, setAllModels] = useState<Model[]>([]);
@@ -60,14 +61,12 @@ export const ProductPage: React.FC = () => {
         {category === 'phones' ? 'Mobile phones' : category}
       </h1>
 
-      <div className={styles.product__amount_models}>
-        {filteredModels.length} models
-      </div>
+      <AmountModels models={filteredModels} />
 
       <ControlsPanel />
 
       <div className={styles.product__cards}>
-        <ProductCarts model={filteredModels} />
+        <ProductCarts model={filteredModels} pagination />
       </div>
     </div>
   );

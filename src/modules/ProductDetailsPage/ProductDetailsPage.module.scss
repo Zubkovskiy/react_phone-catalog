@@ -1,19 +1,15 @@
 .back {
-  cursor: pointer;
-
   display: flex;
-  gap: 4px;
   align-items: center;
-
+  gap: 4px;
   margin-bottom: 16px;
-
+  cursor: pointer;
   font-size: 12px;
   font-weight: 700;
   color: var(--gray-white);
 
   &::before {
     content: '';
-
     display: inline-flex;
 
     width: 16px;
