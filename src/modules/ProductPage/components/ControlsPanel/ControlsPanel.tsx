@@ -50,25 +50,29 @@ export const ControlsPanel: FC = () => {
 
   return (
     <div className={styles.panel}>
-      <CustomSelect
-        title="Sort by"
-        options={SORT_OPTIONS}
-        selected={sort}
-        onSelect={value => {
-          setSort(value);
-          updateParam('sort', value);
-        }}
-      />
+      <div className={`${styles.panel__item} ${styles.panel__item_sort}`}>
+        <CustomSelect
+          title="Sort by"
+          options={SORT_OPTIONS}
+          selected={sort}
+          onSelect={value => {
+            setSort(value);
+            updateParam('sort', value);
+          }}
+        />
+      </div>
 
-      <CustomSelect
-        title="Items on page"
-        options={PER_PAGE_OPTIONS}
-        selected={perPage}
-        onSelect={value => {
-          setPerPage(value);
-          updateParam('perPage', value);
-        }}
-      />
+      <div className={`${styles.panel__item} ${styles.panel__item_perPage}`}>
+        <CustomSelect
+          title="Items on page"
+          options={PER_PAGE_OPTIONS}
+          selected={perPage}
+          onSelect={value => {
+            setPerPage(value);
+            updateParam('perPage', value);
+          }}
+        />
+      </div>
     </div>
   );
 };

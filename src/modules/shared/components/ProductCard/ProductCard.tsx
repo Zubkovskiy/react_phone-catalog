@@ -6,16 +6,25 @@ import styles from './ProductCard.module.scss';
 import { Link } from 'react-router-dom';
 import { Model } from '../../../../types/Model';
 import { ButtonsCard } from '../ButtonsCard';
+import classNames from 'classnames';
 
 type Props = {
   model: Model;
   discount?: boolean;
+  slider?: boolean;
 };
 
-export const ProductCard: React.FC<Props> = ({ model, discount }) => {
+export const ProductCard: React.FC<Props> = ({ model, discount, slider }) => {
   return (
-    <div className={styles.model}>
-      <Link to={`/${model.category}/${model.itemId || model.id}`}>
+    <div
+      className={classNames(styles.model, {
+        [styles.model_slider]: slider,
+      })}
+    >
+      <Link
+        to={`/${model.category}/${model.itemId || model.id}`}
+        className={styles.img_wrap}
+      >
         <img src={model.image} alt={model.name} className={styles.img} />
       </Link>
 

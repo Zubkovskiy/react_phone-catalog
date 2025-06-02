@@ -19,7 +19,6 @@ export const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const discount = true;
   const titleNewModels = 'Brand new models';
   const titleHotPrices = 'Hot prices';
 
@@ -79,11 +78,7 @@ export const HomePage = () => {
         <Categorys />
       </div>
       <div className={styles.hot_prices}>
-        <ProductsSlider
-          models={hotPrices}
-          title={titleHotPrices}
-          discount={discount}
-        />
+        <ProductsSlider models={hotPrices} title={titleHotPrices} discount />
       </div>
     </div>
   );

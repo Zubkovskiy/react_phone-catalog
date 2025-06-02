@@ -1,7 +1,15 @@
+@use '../../utils/mixins.scss' as *;
+
 .carts {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  justify-items: center;
   gap: 40px 16px;
+
+  grid-template-columns: repeat(auto-fill, minmax(229px, 1fr));
+
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
 }
 
 .pagination {

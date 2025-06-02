@@ -53,7 +53,7 @@ export const ProductsSlider: React.FC<Props> = ({
       >
         {models.map(model => (
           <SwiperSlide key={model.id} className={styles.products_slide}>
-            <ProductCard model={model} discount={discount} />
+            <ProductCard model={model} discount={discount} slider />
           </SwiperSlide>
         ))}
       </Swiper>
