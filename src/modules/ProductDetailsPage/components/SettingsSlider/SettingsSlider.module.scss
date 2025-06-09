@@ -1,7 +1,18 @@
+@use '../../../shared/utils/mixins.scss' as *;
+
 .wrapper {
   display: flex;
   flex-direction: column;
   width: 320px;
+
+  @include respond-to(tablet) {
+    width: 50%;
+    min-width: 237px;
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+  }
 }
 
 .title {
@@ -18,7 +29,7 @@
 .list {
   display: flex;
   gap: 16px;
-  width: 320px;
+  max-width: 320px;
   margin-bottom: 24px;
 }
 

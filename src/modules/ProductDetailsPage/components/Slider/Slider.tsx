@@ -21,14 +21,24 @@ export const Slider: React.FC<Props> = ({ product }) => {
     <div className={styles.container}>
       <Swiper
         onSwiper={setThumbsSwiper}
-        direction="vertical"
+        direction="horizontal"
         slidesPerView="auto"
-        spaceBetween={16}
+        spaceBetween={8}
         modules={[Thumbs]}
         watchSlidesProgress
-        watchOverflow
+        // watchOverflow
         initialSlide={0}
         className={styles.thumbs}
+        breakpoints={{
+          640: {
+            spaceBetween: 8,
+            direction: 'vertical',
+          },
+          1199.9: {
+            spaceBetween: 16,
+            direction: 'vertical',
+          },
+        }}
       >
         {product.images.map((img, i) => (
           <SwiperSlide key={i} className={styles.thumbs__slide}>
@@ -48,7 +58,7 @@ export const Slider: React.FC<Props> = ({ product }) => {
         className={styles.main}
       >
         {product.images.map((img, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} className={styles.main__slide}>
             <img src={img} alt={`main-${i}`} className={styles.main__img} />
           </SwiperSlide>
         ))}

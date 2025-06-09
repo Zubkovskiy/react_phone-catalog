@@ -1,14 +1,28 @@
-@use '../../../shared/utils/mixins';
+@use '../../../shared/utils/mixins.scss' as *;
 
 .description {
   display: flex;
-  gap: 65px;
   justify-content: space-between;
+  gap: 65px;
+
   margin-top: 80px;
+
+  @include respond-to(tablet) {
+    flex-direction: column;
+  }
+
+  @include respond-to(mobile) {
+    margin-top: 56px;
+    gap: 56px;
+  }
 }
 
 .about {
   max-width: 560px;
+
+  @include respond-to(tablet) {
+    max-width: 100%;
+  }
 }
 
 .specs {
@@ -32,6 +46,10 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--gray-white);
+
+  @include respond-to(mobile) {
+    font-size: 16px;
+  }
 }
 
 .text {
@@ -58,6 +76,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 30px;
+
   width: 100%;
 }
 
@@ -72,11 +92,12 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 150%;
+  text-align: right;
   color: var(--gray-white);
 }
 
 .line {
-  @include mixins.line;
+  @include line;
 
   margin-bottom: 32px;
 }

@@ -52,5 +52,8 @@
 }
 
 .name {
+  overflow: hidden;
   color: var(--gray-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
