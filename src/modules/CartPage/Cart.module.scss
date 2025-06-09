@@ -1,3 +1,5 @@
+@use '../shared/utils/mixins.scss' as *;
+
 .back {
   display: flex;
   align-items: center;
@@ -27,10 +29,16 @@
 
 .cart {
   display: flex;
-  justify-content: center;
   gap: 16px;
-
+  justify-content: center;
   margin: 32px 0 80px;
+
+  @include respond-to(tablet) {
+    gap: 32px;
+    flex-direction: column;
+    width: 100%;
+    margin: 32px 0 64px;
+  }
 
   &__cards {
     display: flex;
@@ -46,16 +54,35 @@
     height: 128px;
     padding: 0 24px;
     background: var(--gray-surface-1);
+
+    @include respond-to(tablet) {
+      width: 100%;
+    }
+
+    @include respond-to(mobile) {
+      flex-direction: column;
+      padding: 16px;
+      height: 160px;
+    }
   }
 
   &__left {
     display: flex;
     align-items: center;
+
+    @include respond-to(mobile) {
+      justify-content: start;
+      width: 100%;
+    }
   }
 
   &__cross {
     margin-right: 32px;
     cursor: pointer;
+
+    @include respond-to(mobile) {
+      margin-right: 16px;
+    }
 
     &::before {
       content: '';
@@ -75,6 +102,10 @@
     height: 80px;
     margin-right: 29.5px;
     object-fit: contain;
+
+    @include respond-to(mobile) {
+      margin-right: 16px;
+    }
   }
 
   &__name {
@@ -90,6 +121,11 @@
     align-items: center;
     justify-content: space-between;
     width: 200px;
+
+    @include respond-to(mobile) {
+      width: 100%;
+
+    }
   }
 
   &__counter {
@@ -173,12 +209,14 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
   width: 368px;
   height: 206px;
   padding: 24px;
-
   border: 1px solid var(--gray-elements);
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
 
   &__sum {
     font-weight: 800;
@@ -199,12 +237,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 320px;
     height: 48px;
     background: var(--accent);
     cursor: pointer;
     transition: var(--transition);
+
+    @include respond-to(tablet) {
+      width: 100%;
+    }
 
     &:hover {
       background: var(--accent-hover);
