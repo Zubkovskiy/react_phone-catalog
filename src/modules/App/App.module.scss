@@ -15,7 +15,7 @@
   --third-family: "Manrope", sans-serif;
   --container: 1136px;
   --transition: all .3s ease;
-  --transition-background: background 0.3s ease;
+  --transition-base: background 0.3s ease, color 0.3s ease;
   --scale: scale(1.1);
   --border: 1px solid var(--gray-surface-2);
 }

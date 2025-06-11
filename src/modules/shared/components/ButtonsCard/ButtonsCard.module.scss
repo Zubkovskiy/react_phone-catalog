@@ -5,6 +5,7 @@
   gap: 8px;
   align-items: center;
   margin-top: 8px;
+  transition: var(--transition-base);
 }
 
 .cart {
@@ -23,7 +24,7 @@
   text-align: center;
   cursor: pointer;
   background: var(--accent);
-  transition: var(--transition);
+  transition: var(--transition-base);
 
   &:hover {
     background: var(--accent-hover);
@@ -53,6 +54,7 @@
 
   cursor: pointer;
   background: var(--gray-surface-2);
+  transition: var(--transition-base);
 
   &::before {
     cursor: pointer;
@@ -67,7 +69,6 @@
 
   &:hover {
     background: var(--gray-icons-placeholders);
-    transition: var(--transition-background);
   }
 }
 

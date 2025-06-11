@@ -13,13 +13,16 @@
   }
 }
 
-.home, .arrow {
+.home,
+.arrow {
   display: flex;
 
   &::before {
+    content: '';
     display: inline-block;
     width: 16px;
     height: 16px;
+    transition: var(--transition);
   }
 }
 
@@ -27,7 +30,13 @@
   cursor: pointer;
 
   &::before {
-    content: url('/img/icons/home.svg');
+    background-color: var(--gray-white);
+    mask: url('/img/icons/home.svg') no-repeat center / contain;
+    -webkit-mask: url('/img/icons/home.svg') no-repeat center / contain;
+  }
+
+  &:hover::before {
+    background-color: var(--accent);
   }
 }
 
@@ -44,6 +53,11 @@
   font-weight: 700;
   color: var(--gray-secondary);
   text-transform: capitalize;
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--accent);
+  }
 }
 
 .active {
