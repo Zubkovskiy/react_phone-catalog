@@ -1,6 +1,4 @@
 // ! Переробити картинки слайдера, зробити кнопку
-// ! Зробити Link
-// ! Зробити кнопки активними
 
 import { MainSlider } from './components/MainSlider';
 import { Categorys } from './components/Categorys/Categorys';
@@ -9,15 +7,17 @@ import { goods } from '../../services/goods';
 import { Model } from '../../types/Model';
 import { ProductsSlider } from '../shared/components/ProductsSlider';
 
-import global from '../shared/globalStyles.module.scss';
+import globalStyles from '../shared/globalStyles.module.scss';
 import styles from './HomePage.module.scss';
+import { Loader } from '../shared/components/Loader';
+import { ErrorMessage } from '../shared/components/ErrorMessage';
 
 export const HomePage = () => {
   const [newModels, setNewModels] = useState<Model[]>([]);
   const [hotPrices, setHotPrices] = useState<Model[]>([]);
 
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, seterror] = useState('');
 
   const titleNewModels = 'Brand new models';
   const titleHotPrices = 'Hot prices';
@@ -33,11 +33,11 @@ export const HomePage = () => {
 
         setNewModels(newModelsData);
         setHotPrices(hotPricesData);
-      } catch (error) {
-        if (error instanceof Error) {
-          setErrorMessage(error.message);
+      } catch (err) {
+        if (err instanceof Error) {
+          seterror('Failed to load');
         } else {
-          setErrorMessage('An unknown error occurred');
+          seterror('An unknown error occurred');
         }
       } finally {
         setLoading(false);
@@ -48,25 +48,20 @@ export const HomePage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
-  if (!loading && errorMessage) {
-    return (
-      <div>
-        <p>{errorMessage}</p>
-        <button onClick={() => window.location.reload()}>Reload</button>
-      </div>
-    );
+  if (!loading && error) {
+    return <ErrorMessage error={error} />;
   }
 
-  if (!newModels.length || (!hotPrices.length && !loading && !errorMessage)) {
+  if (!newModels.length || (!hotPrices.length && !loading && !error)) {
     return <div>No data</div>;
   }
 
   return (
     <div className={styles.home}>
-      <h1 className={global.title}>Welcome to Nice Gadgets store!</h1>
+      <h1 className={globalStyles.title}>Welcome to Nice Gadgets store!</h1>
       <div className={styles.main_slider}>
         <MainSlider />
       </div>

@@ -1,35 +1,38 @@
-import { Nesting } from '../shared/components/Nesting/Nesting';
-
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import styles from './ProductDetailsPage.module.scss';
+import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Slider } from './components/Slider';
 import { SettingsSlider } from './components/SettingsSlider';
-import { useEffect, useState } from 'react';
-import { goods } from '../../services/goods';
-import { Product } from '../../types/Product';
 import { Description } from './components/Description';
 import { ProductsSlider } from '../shared/components/ProductsSlider';
+
+import styles from './ProductDetailsPage.module.scss';
+
+import { goods } from '../../services/goods';
+import { Product } from '../../types/Product';
 import { Model } from '../../types/Model';
+import { Loader } from '../shared/components/Loader';
+import { ErrorMessage } from '../shared/components/ErrorMessage';
 
 export const ProductDetailsPage = () => {
   const { category, id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [randomProducts, setRandomProducts] = useState<Model[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+
     goods
       .productDetailsFetch(category as string)
       .then(data => {
-        const foundProduct = data.find(item => item.id === id) as
-          | Product
-          | undefined;
+        const found = data.find(item => item.id === id);
 
-        if (foundProduct !== undefined) {
-          setProduct(foundProduct);
+        if (found) {
+          setProduct(found);
         } else {
           setError('Product not found');
         }
@@ -43,29 +46,28 @@ export const ProductDetailsPage = () => {
   }, [category, id]);
 
   useEffect(() => {
-    setLoading(true);
+    if (!product) {
+      return;
+    }
+
     goods
       .getSuggestedProducts()
       .then(setRandomProducts)
       .catch(() => {
-        setError('Failed to load product details');
-      })
-      .finally(() => {
-        setLoading(false);
+        setError('Failed to load suggestions');
       });
   }, [product]);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   if (error && !loading) {
-    return (
-      <div>
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Reload</button>
-      </div>
-    );
+    return <ErrorMessage error={error} />;
   }
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <ErrorMessage error="Unknown error" />;
   }
 
   return (

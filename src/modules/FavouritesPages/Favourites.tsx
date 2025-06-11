@@ -15,7 +15,9 @@ export const Favourites = () => {
 
       <h1 className={globalStyles.title}>Favourites</h1>
 
-      <AmountModels models={favorites} />
+      <AmountModels
+        models={favorites.map(model => ({ ...model, quantity: 1 }))}
+      />
 
       {favorites.length === 0 ? (
         <p className={styles.no_items}>You have no favorite items.</p>

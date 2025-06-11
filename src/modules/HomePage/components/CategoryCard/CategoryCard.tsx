@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './CategoryCard.module.scss';
-import { Loader } from '../../../shared/components/Loader';
+import { Loader } from '../../../shared/components/Loader/Loader';
 
 type Props = {
   name: string;
