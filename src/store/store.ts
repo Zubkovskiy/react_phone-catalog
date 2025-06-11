@@ -1,10 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Model } from '../types/Model';
-
-interface CartItem extends Model {
-  quantity: number;
-}
+import { CartItem } from '../types/CartItem';
 
 interface StoreState {
   cart: CartItem[];
