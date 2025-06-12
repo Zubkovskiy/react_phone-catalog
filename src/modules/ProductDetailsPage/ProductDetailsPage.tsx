@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Nesting } from '../shared/components/Nesting/Nesting';
 import { Slider } from './components/Slider';
@@ -13,37 +13,39 @@ import { goods } from '../../services/goods';
 import { Product } from '../../types/Product';
 import { Model } from '../../types/Model';
 import { Loader } from '../shared/components/Loader';
-import { ErrorMessage } from '../shared/components/ErrorMessage';
 
 export const ProductDetailsPage = () => {
   const { category, id } = useParams();
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState<Product | null>(null);
   const [randomProducts, setRandomProducts] = useState<Model[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    const fetchProduct = async () => {
+      setLoading(true);
 
-    goods
-      .productDetailsFetch(category as string)
-      .then(data => {
+      try {
+        const data = await goods.productDetailsFetch(category as string);
         const found = data.find(item => item.id === id);
 
-        if (found) {
-          setProduct(found);
-        } else {
-          setError('Product not found');
+        if (!found) {
+          navigate('/not-found', { replace: true });
+
+          return;
         }
-      })
-      .catch(() => {
-        setError('Failed to load product details');
-      })
-      .finally(() => {
+
+        setProduct(found);
+      } catch (error) {
+        navigate('/not-found', { replace: true });
+      } finally {
         setLoading(false);
-      });
-  }, [category, id]);
+      }
+    };
+
+    fetchProduct();
+  }, [category, id, navigate]);
 
   useEffect(() => {
     if (!product) {
@@ -53,47 +55,39 @@ export const ProductDetailsPage = () => {
     goods
       .getSuggestedProducts()
       .then(setRandomProducts)
-      .catch(() => {
-        setError('Failed to load suggestions');
-      });
+      .catch(() => {});
   }, [product]);
 
   if (loading) {
     return <Loader />;
   }
 
-  if (error && !loading) {
-    return <ErrorMessage error={error} />;
-  }
-
-  if (!product) {
-    return <ErrorMessage error="Unknown error" />;
-  }
-
   return (
-    <div>
-      <Nesting category={category as string} name={product.name} />
+    product && (
+      <div>
+        <Nesting category={category as string} name={product.name} />
 
-      <Link to={`/${category}`} className={styles.back}>
-        Back
-      </Link>
+        <Link to={`/${category}`} className={styles.back}>
+          Back
+        </Link>
 
-      <h1 className={styles.name}>{product.name}</h1>
+        <h1 className={styles.name}>{product.name}</h1>
 
-      <div className={styles.slider_wrapper}>
-        <Slider product={product} />
-        <SettingsSlider product={product} />
+        <div className={styles.slider_wrapper}>
+          <Slider product={product} />
+          <SettingsSlider product={product} />
+        </div>
+
+        <Description product={product} />
+
+        <div className={styles.products_slider}>
+          <ProductsSlider
+            models={randomProducts}
+            title="You may also like"
+            discount
+          />
+        </div>
       </div>
-
-      <Description product={product} />
-
-      <div className={styles.products_slider}>
-        <ProductsSlider
-          models={randomProducts}
-          title="You may also like"
-          discount
-        />
-      </div>
-    </div>
+    )
   );
 };

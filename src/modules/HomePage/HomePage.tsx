@@ -1,5 +1,3 @@
-// ! Переробити картинки слайдера, зробити кнопку
-
 import { MainSlider } from './components/MainSlider';
 import { Categorys } from './components/Categorys/Categorys';
 import { useEffect, useState } from 'react';

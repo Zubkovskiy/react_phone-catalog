@@ -29,56 +29,56 @@ Use the data from `/public/api` and images from `/public/img` folders. You can r
    - Use CSS modules.
    - Keep `.module.scss` files together with their components.
 2. Advanced project structure:
-   - `src/modules` папка.Внутренние модули на страницу `HomePage`, `CartPage`, etc., and `shared` Папка с общим содержанием между модулями.
-   - Внутри каждого модуля свой собственный `components` Папка со структурой, описанной выше.И необязательно другие файлы/папки: `hooks`, `constants`, and so on.
-3. Добавьте липкий заголовок с логотипом, навигацией, фаворитами и тележкой.
+   - `src/modules` folder. Inside per page modules `HomePage`, `CartPage`, etc., and `shared` folder with shared content between modules.
+   - Inside each module its own `components` folder with the structure described above. And optionally other files/folders: `hooks`, `constants`, and so on.
+3. Add the sticky header with a logo, navigation, favorites, and cart.
 4. The footer with the link to the GitHub repo and `Back to top` button.
-   - Содержание должно быть ограничено той же шириной, что и содержание страницы;
+   - The content should be limited to the same width as the page content;
    - `Back to top` button should scroll to the top smoothly;
 5. Add `NotFoundPage` containing text `Page not found` for all the unknown URLs.
 6. All changes the hover effects should be smooth.
 7. Scale all image links by 10% on hover.
-8. Реализуйте все элементы формы и значки в соответствии с набором пользовательского интерфейса.
+8. Implement all form elements and icons according to the UI Kit.
 
 ## Home page
 
 Implement Home page at available at `/`.
 
 1. `<h1>Product Catalog</h1>` should be visually hidden.
-2. `Picturesslider`:
-- Найдите свои собственные изображения, чтобы персонализировать приложение;
-- менять картинки автоматически каждые 5 секунд;
-- Следующие кнопки должны показывать первое изображение после последнего;
-- Черный цвет внизу должен позволить выбрать точную картину.
-3.
-- продукты со скидкой, начиная с самой большой абсолютной стоимости;
-- `<` `и`> `кнопки должны прокручивать продукты.
+2. `PicturesSlider`:
+   - Find your own images to personalize the App;
+   - Change pictures automatically every 5 seconds;
+   - The next buttons should show the first image after the last one;
+   - Dashes at the bottom should allow choosing an exact picture.
+3. `ProductsSlider` for the `Hot prices` block:
+   - The products with a discount starting from the biggest absolute value;
+   - `<` and `>` buttons should scroll products.
 4. `Shop by category` block with links to `/phones`, `/tablets`, and `/accessories`.
 5. Add Brand new block using ProductsSlider with products that are the newest according to the year field.
 
 ## Product pages
 
-Должно быть 3 отдельных страниц `/телефонов`,`/таблеток и `/аксессуаров.
+There should be 3 separate pages `/phones`, `/tablets`, and `/accessories`.
 
-1. Каждая страница загружает данные требуемого `type`.
-2. Добавьте `h1` с` телефоны/планшеты/страница аксессуаров (выберите необходимый).
-3. Добавить компонент `productslist`, показывающий все продукты.
-4. Реализуйте `Loader ', чтобы показать его в ожидании данных с сервера.
-5. В случае ошибки загрузки показать что -то пошло неправильное сообщение с кнопкой перезагрузки.
-6. Если нет доступных продуктов, показывают, что сообщение пока нет телефонов/планшетов/аксессуаров (выберите необходимые).
-  7. Добавьте `<SELECT>` с `NewSave`,` ALPHABOTICALY` и `Самые дешевые 'варианты для сортировки продуктов по` age`, `title' или` price '(после скидки).
-- Сохраните значение сортировки в URL `? Sort = age` и примените его после перезагрузки страницы.
-8. Добавьте кнопки «странификации» и элементы `на странице« Выберите элемент с параметрами `4`,` 8`, `16` и` all ».
-- это должно ограничить продукты, которые вы показываете пользователю;
-- Сохранить параметры странификации в URL `? Page = 2 & perpage = 8` (` page = 1` и `perpage = all` значения по умолчанию и не должны быть добавлены в URL;
-- Скрыть элементы страниц, если они не имеют смысла;
--Вы можете использовать логику, объясненную в [задаче React Pagination] (https://github.com/mate-academy/react_pagination#react-pagination).
+1. Each page loads the data of the required `type`.
+2. Add an `h1` with `Phones/Tablets/Accessories page` (choose required).
+3. Add `ProductsList` component showing all the `products`.
+4. Implement a `Loader` to show it while waiting for the data from the server.
+5. In case of a loading error show the something went wrong message with a reload button.
+6. If there are no products available show the `There are no phones/tablets/accessories yet` message (choose required).
+7. Add a `<select>` with the `Newest`, `Alphabetically`, and `Cheapest` options to sort products by `age`, `title`, or `price` (after discount).
+   - Save the sort value in the URL `?sort=age` and apply it after the page reload.
+8. Add `Pagination` buttons and `Items on page` select element with `4`, `8`, `16`, and `all` options.
+   - It should limit the products you show to the user;
+   - Save pagination params in the URL `?page=2&perPage=8` (`page=1` and `perPage=all` are the default values and should not be added to the URL;
+   - Hide pagination elements if they do not make sense;
+   - You can use the logic explained in [the React Pagination task](https://github.com/mate-academy/react_pagination#react-pagination).
 
 ## Product details page
 
 Create `ProductDetailsPage` available at `/product/:productId`.
 
-1. `ProductCart` image and title should be links to the product details page.
+1. `ProductCard` image and title should be links to the product details page.
 2. Use `Loader` when fetching the product details.
 3. Show the details on the page:
    - Display the available colors from colorsAvailable and the capacities from capacityAvailable as radio inputs, allowing the selection of one value from the offered options;
@@ -100,7 +100,7 @@ Create a Cart page with a list of `CartItem`s at `/cart`.
 Each item should have an `id`, `quantity`, and a `product`.
 Use React Context or Redux to store Items.
 
-1. `Add to cart` button in the `ProductCart` should add a product to the `Cart`.
+1. `Add to cart` button in the `ProductCard` should add a product to the `Cart`.
 2. If the product is already in the `Cart` the button should say `Added to cart` and do nothing.
 3. Add the ability to remove items from the `Cart` with an `x` button next to a `CartItem`.
 4. Add a message `Your cart is empty` when there are no products in the `Cart`.
@@ -117,7 +117,7 @@ Use React Context or Redux to store Items.
 
 Create `Favorites` page with a `ProductsList` showing favorite products at `/favorites`.
 
-1. Add/remove a product to favorites by pressing a heart button in the `ProductCart` element.
+1. Add/remove a product to favorites by pressing a heart button in the `ProductCard` element.
 2. The heart should be highlighted if the product is already added to the favorites.
 3. Use React Context or Redux to store the favorites.
 4. Show the number of favorites at the `Favorites` icon in the header.
