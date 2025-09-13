@@ -54,8 +54,8 @@ img {
 .container {
   position: relative;
   max-width: var(--container);
-  min-height: calc(100vh - 64px - 96px - 1px);
   margin: 0 auto;
+  min-height: calc(100vh - 64px - 96px - 1px);
 
   @include respond-to(tablet) {
     min-height: calc(100vh - 48px - 96px - 1px);
@@ -70,7 +70,6 @@ img {
 
 .App {
   position: relative;
-  height: 100vh;
 }
 
 .main {
